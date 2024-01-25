@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from './Header';
-
+import '../assets/vendors/mdi/css/materialdesignicons.min.css';
 
 const Sidebar = () => {
     return (
@@ -24,68 +23,36 @@ const Sidebar = () => {
 
               <li className="nav-item">
                 {/* Utilisez le composant Link pour créer le lien */}
-                <Link to="/insert-marque" className="nav-link">
+                <Link to="/element" className="nav-link">
                   <i className="typcn typcn-briefcase menu-icon"></i>
-                  <span className="menu-title">Marque</span>
+                  <span className="menu-title"> Element</span>
                 </Link>
               </li>
 
               <li className="nav-item">
                 {/* Utilisez le composant Link pour créer le lien */}
-                <Link to="/insert-categorie" className="nav-link">
+                <Link to="" className="nav-link">
                   <i className="typcn typcn-briefcase menu-icon"></i>
-                  <span className="menu-title">Categorie</span>
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
-                <Link to="/insert-type" className="nav-link">
-                  <i className="typcn typcn-briefcase menu-icon"></i>
-                  <span className="menu-title">Type Carburant</span>
-                </Link>
-              </li>
-
-
-              <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
-                <Link to="/insert-fonctionnalite" className="nav-link">
-                  <i className="typcn typcn-briefcase menu-icon"></i>
-                  <span className="menu-title">Fonctionnalite technologique</span>
-                </Link>
-              </li>
-              <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
-                <Link to="/insert-ChoixFonctionnalite" className="nav-link">
-                  <i className="typcn typcn-briefcase menu-icon"></i>
-                  <span className="menu-title"> Choix Fonctionnalite technologique</span>
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
-                <Link to="/insert-modele" className="nav-link">
-                  <i className="typcn typcn-briefcase menu-icon"></i>
-                  <span className="menu-title"> Modele</span>
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
-                <Link to="/insert-sousModele" className="nav-link">
-                  <i className="typcn typcn-briefcase menu-icon"></i>
-                  <span className="menu-title"> Sous modele</span>
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
-                <Link to="/insert-interet" className="nav-link">
-                  <i className="typcn typcn-briefcase menu-icon"></i>
-                  <span className="menu-title"> Interet</span>
+                  <span className="menu-title"> Statistiques</span>
                 </Link>
               </li>
               
+              <li className="nav-item">
+                {/* Utilisez le composant Link pour créer le lien */}
+                <Link to="/listeAnnonce" className="nav-link">
+                  <i className="typcn typcn-briefcase menu-icon"></i>
+                  <span className="menu-title"> Annonces</span>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                {/* Utilisez le composant Link pour créer le lien */}
+                <Link to="/login" className="nav-link">
+                  <i className="typcn typcn-briefcase menu-icon"></i>
+                  <span className="menu-title">Logout</span>
+                </Link>
+              </li>
+
 
             </ul>
           </nav>
