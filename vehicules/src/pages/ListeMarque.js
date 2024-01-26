@@ -1,39 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import ReactPaginate from 'react-paginate';
-import '../assets/vendors/typicons.font/font/typicons.css';
-import '../assets/vendors/css/vendor.bundle.base.css';
-import '../assets/css/vertical-layout-light/style.css';
-import '../assets/vendors/progressbar.js/progressbar.min';
-import '../assets/js/hoverable-collapse.js';
-import '../assets/js/off-canvas.js';
-import '../assets/js/settings.js';
-import '../assets/js/todolist.js';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeMarque() {
-  const [data, setData] = useState([
-    { name: 'Jacob', country: 'Photoshop' },
-    { name: 'Messy', country: 'Flash' },
-    { name: 'John', country: 'Premier' },
-    { name: 'Peter', country: 'After effects' },
-    { name: 'Dave', country: '53275535' },
-    { name: 'Dave', country: '53275535' },
-  ]);
-
+  const [marques, setMarques] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
-  const itemsPerPage = 5; // Number of items per page
+  const itemsPerPage = 5; // Nombre d'éléments par page
 
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  useEffect(() => {
+    axios.get('http://localhost:8080/marques')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setMarques(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
+
+  const pageCount = Math.ceil(marques.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;
 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
 
-  const displayedItems = data.slice(offset, offset + itemsPerPage);
+  const displayedItems = marques.slice(offset, offset + itemsPerPage);
 
   return (
     <div className="container-scroller">
@@ -50,26 +47,25 @@ function ListeMarque() {
                     <tr>
                       <th>Marque</th>
                       <th>Pays</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {displayedItems.map((item, index) => (
+                    {displayedItems.map((marque, index) => (
                       <tr key={index}>
-                        <td>{item.name}</td>
-                        <td>{item.country}</td>
+                        <td>{marque.id}</td>
+                        <td>{marque.nom_Marque}</td>
                         <td>
-                            <Link to="" >
-                            <button type="button" class="btn btn-success btn-rounded btn-icon">
-                              <i class="typcn typcn-edit"></i>
+                          <Link to={`/edit-marque/${marque.id}`}>
+                            <button type="button" className="btn btn-success btn-rounded btn-icon">
+                              <i className="typcn typcn-edit"></i>
                             </button>
-                            </Link>
-                        </td>
-                            <td>
-                            <Link to="" >
-                            <button type="button" class="btn btn-danger btn-rounded btn-icon">
-                              <i class="typcn typcn-trash"></i>
+                          </Link>
+                          <Link to={`/delete-marque/${marque.id}`}>
+                            <button type="button" className="btn btn-danger btn-rounded btn-icon">
+                              <i className="typcn typcn-trash"></i>
                             </button>
-                            </Link>
+                          </Link>
                         </td>
                       </tr>
                     ))}
