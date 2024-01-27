@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
@@ -23,17 +24,30 @@ function ListeCategorie() {
     { name: 'Dave', country: '53275535' },
   ]);
 
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:8081/categories')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setCategories(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
+
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
 
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  const pageCount = Math.ceil(categories.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;
 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
 
-  const displayedItems = data.slice(offset, offset + itemsPerPage);
+  const displayedItems = categories.slice(offset, offset + itemsPerPage);
 
   return (
     <div className="container-scroller">
@@ -53,10 +67,10 @@ function ListeCategorie() {
                     </tr>
                   </thead>
                   <tbody>
-                    {displayedItems.map((item, index) => (
+                    {displayedItems.map((categorie, index) => (
                       <tr key={index}>
-                        <td>{item.name}</td>
-                        <td>{item.country}</td>
+                        <td>{categorie.id}</td>
+                        <td>{categorie.nomCategorie}</td>
                         <td>
                             <Link to="" >
                             <button type="button" class="btn btn-success btn-rounded btn-icon">
