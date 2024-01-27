@@ -3,13 +3,14 @@ import axios from 'axios';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
 import '../assets/css/vertical-layout-light/style.css';
-import '../assets/vendors/progressbar.js/progressbar.min';
 import '../assets/js/hoverable-collapse.js';
 import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import REact, {useEffect , useState} from 'react';
+import axios from 'axios';
 
 function InsertMarque() {
 
@@ -20,13 +21,12 @@ function InsertMarque() {
         e.preventDefault();
         try {
             await axios.post(
-                "http://localhost:8080/marque",
-                JSON.stringify({ nom, id_pays }),
+                "http://localhost:8080/marque/" + nom + "/" + id_pays,
                 {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 }
             );
         } catch (error) {
@@ -41,7 +41,7 @@ function InsertMarque() {
     const [pays, setPays] = useState([]);
 
     useEffect(() => {
-    axios.get('http://localhost:8081/pays')
+    axios.get('http://localhost:8080/pays')
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setPays(response.data.data);
@@ -64,10 +64,11 @@ function InsertMarque() {
                             <div className="card ">
                                 <div className="card-body">
                                     <h4 className="card-title">Insertion Marque</h4>
-                                        <form className="forms-sample">
+                                        <form className="forms-sample" onSubmit={handleFormSubmit}>
                                             <div className="form-group">
                                                 <label >Marque</label>
-                                                <input type="text" className="form-control" id="exampleInputUsername1" placeholder="nomMarque"/>
+                                                <input type="text" className="form-control" id="exampleInputUsername1" placeholder="nomMarque"
+                                                    onChange={(e) => setNom(e.target.value)}/>
                                             </div>
                                             <div className="form-group ">
 

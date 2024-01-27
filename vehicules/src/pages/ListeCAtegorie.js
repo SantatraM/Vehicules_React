@@ -4,7 +4,6 @@ import ReactPaginate from 'react-paginate';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
 import '../assets/css/vertical-layout-light/style.css';
-import '../assets/vendors/progressbar.js/progressbar.min';
 import '../assets/js/hoverable-collapse.js';
 import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';

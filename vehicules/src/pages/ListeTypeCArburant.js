@@ -4,11 +4,13 @@ import ReactPaginate from 'react-paginate';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
 import '../assets/css/vertical-layout-light/style.css';
-import '../assets/vendors/progressbar.js/progressbar.min';
 import '../assets/js/hoverable-collapse.js';
 import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
@@ -28,6 +30,19 @@ function ListeTypeCArburant() {
         }
       });
   }, []);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/typecarburants')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setData(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
+
 
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
@@ -65,15 +80,15 @@ function ListeTypeCArburant() {
                         <td>{item.nomtypecarburant}</td>
                         <td>
                             <Link to="" >
-                            <button type="button" class="btn btn-success btn-rounded btn-icon">
-                              <i class="typcn typcn-edit"></i>
+                            <button type="button" className="btn btn-success btn-rounded btn-icon">
+                              <i className="typcn typcn-edit"></i>
                             </button>
                             </Link>
                         </td>
                             <td>
                             <Link to="" >
-                            <button type="button" class="btn btn-danger btn-rounded btn-icon">
-                              <i class="typcn typcn-trash"></i>
+                            <button type="button" className="btn btn-danger btn-rounded btn-icon">
+                              <i className="typcn typcn-trash"></i>
                             </button>
                             </Link>
                         </td>

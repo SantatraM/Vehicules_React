@@ -1,17 +1,9 @@
 import React, { useState , useEffect } from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
-import '../assets/vendors/typicons.font/font/typicons.css';
-import '../assets/vendors/css/vendor.bundle.base.css';
-import '../assets/css/vertical-layout-light/style.css';
-import '../assets/vendors/progressbar.js/progressbar.min';
-import '../assets/js/hoverable-collapse.js';
-import '../assets/js/off-canvas.js';
-import '../assets/js/settings.js';
-import '../assets/js/todolist.js';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeMarque() {
@@ -20,10 +12,10 @@ function ListeMarque() {
 
 
   const [pageNumber, setPageNumber] = useState(0);
-  const itemsPerPage = 5; // Number of items per page
+  const itemsPerPage = 5; // Nombre d'éléments par page
 
   useEffect(() => {
-    axios.get('http://localhost:8081/marques')
+    axios.get('http://localhost:8080/marques')
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setMarques(response.data.data);
@@ -41,7 +33,7 @@ function ListeMarque() {
     setPageNumber(selected);
   };
 
-  const displayedItems = data.slice(offset, offset + itemsPerPage);
+  const displayedItems = marques.slice(offset, offset + itemsPerPage);
 
   return (
     <div className="container-scroller">
@@ -58,10 +50,11 @@ function ListeMarque() {
                     <tr>
                       <th>Marque</th>
                       <th>Pays</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {displayedItems.map((item, index) => (
+                    {displayedItems.map((marque, index) => (
                       <tr key={index}>
                         <td>{item.id}</td>
                         <td>{item.nom_Marque}</td>
@@ -77,7 +70,7 @@ function ListeMarque() {
                             <button type="button" className="btn btn-danger btn-rounded btn-icon">
                               <i className="typcn typcn-trash"></i>
                             </button>
-                            </Link>
+                          </Link>
                         </td>
                       </tr>
                     ))}
