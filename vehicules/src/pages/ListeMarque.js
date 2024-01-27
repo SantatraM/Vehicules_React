@@ -63,19 +63,19 @@ function ListeMarque() {
                   <tbody>
                     {displayedItems.map((item, index) => (
                       <tr key={index}>
-                        <td>{item.name}</td>
-                        <td>{item.country}</td>
+                        <td>{item.id}</td>
+                        <td>{item.nom_Marque}</td>
                         <td>
                             <Link to="" >
-                            <button type="button" class="btn btn-success btn-rounded btn-icon">
-                              <i class="typcn typcn-edit"></i>
+                            <button type="button" className="btn btn-success btn-rounded btn-icon">
+                              <i className="typcn typcn-edit"></i>
                             </button>
                             </Link>
                         </td>
                             <td>
                             <Link to="" >
-                            <button type="button" class="btn btn-danger btn-rounded btn-icon">
-                              <i class="typcn typcn-trash"></i>
+                            <button type="button" className="btn btn-danger btn-rounded btn-icon">
+                              <i className="typcn typcn-trash"></i>
                             </button>
                             </Link>
                         </td>

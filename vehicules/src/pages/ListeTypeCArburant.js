@@ -61,8 +61,8 @@ function ListeTypeCArburant() {
                   <tbody>
                     {displayedItems.map((item, index) => (
                       <tr key={index}>
-                        <td>{item.name}</td>
-                        <td>{item.country}</td>
+                        <td>{item.idtypecarburant}</td>
+                        <td>{item.nomtypecarburant}</td>
                         <td>
                             <Link to="" >
                             <button type="button" class="btn btn-success btn-rounded btn-icon">
