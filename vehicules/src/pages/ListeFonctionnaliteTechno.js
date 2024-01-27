@@ -9,7 +9,6 @@ import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 
-import axios from 'axios';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
@@ -19,22 +18,10 @@ function ListeFonctionnaliteTechno() {
   const [fonctionnalite, setFonctionnalites] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8081/fonctionnalite')
-      .then(response => {
-        if (Array.isArray(response.data.data)) {
-          setFonctionnalites(response.data.data);
-          console.log(response.data.data);
-        } else {
-          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
-        }
-      });
-  }, []);
-
-  useEffect(() => {
     axios.get('http://localhost:8080/fonctionnalite')
       .then(response => {
         if (Array.isArray(response.data.data)) {
-          setData(response.data.data);
+          setFonctionnalites(response.data.data);
           console.log(response.data.data);
         } else {
           console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);

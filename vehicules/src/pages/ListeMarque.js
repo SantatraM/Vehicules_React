@@ -7,7 +7,7 @@ import Sidebar from '../components/Sidebar';
 import './css/pagination.css';
 
 function ListeMarque() {
-  const [data, setMarques] = useState([
+  const [marques, setMarques] = useState([
   ]);
 
 
@@ -26,7 +26,7 @@ function ListeMarque() {
       });
   }, []);
 
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  const pageCount = Math.ceil(marques.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;
 
   const handlePageClick = ({ selected }) => {
@@ -56,8 +56,8 @@ function ListeMarque() {
                   <tbody>
                     {displayedItems.map((marque, index) => (
                       <tr key={index}>
-                        <td>{item.id}</td>
-                        <td>{item.nom_Marque}</td>
+                        <td>{marque.id}</td>
+                        <td>{marque.nom_Marque}</td>
                         <td>
                             <Link to="" >
                             <button type="button" className="btn btn-success btn-rounded btn-icon">

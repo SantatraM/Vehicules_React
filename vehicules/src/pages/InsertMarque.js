@@ -9,8 +9,6 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import REact, {useEffect , useState} from 'react';
-import axios from 'axios';
 
 function InsertMarque() {
 

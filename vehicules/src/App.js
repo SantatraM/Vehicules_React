@@ -19,6 +19,7 @@ import ListeModele from './pages/ListeModele';
 import ListeSousModele from './pages/ListeSousModele';
 import ListeAnnonceNonValide from './pages/ListeAnnonceNonValide';
 import Login from './pages/Login';
+import Inscription from './pages/Inscription';
 
 function App() {
   const topSellersData = [
@@ -32,6 +33,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element= {<Login/>} />
+        <Route path='/inscription' element= {<Inscription/>} />
         <Route path='/login' element={<Login/>}/>
         <Route path='/element' element = {<Element/>} />
         <Route path='/insert-marque' element= {<InsertMarque/>}/>

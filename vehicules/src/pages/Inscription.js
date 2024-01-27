@@ -7,6 +7,7 @@ import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 function Inscription() {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ function Inscription() {
     sexe: "1",
     login: "",
     motDePasse: "",
-    role: "user",
+    role: "admin",
     adresse: "",
   });
 
@@ -27,8 +28,7 @@ function Inscription() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const history = useHistory();
-    AuthentificationService.register(formData, history);
+    await axios.post( "http://localhost:8080/initial/inscription", formData );
   };
 
 

@@ -1,5 +1,3 @@
-import React, { useState , useEffect } from 'react';
-import axios from 'axios'
 import ReactPaginate from 'react-paginate';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
