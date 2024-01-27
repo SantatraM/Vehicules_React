@@ -86,9 +86,9 @@ function Element() {
                             <span className="menu-title"> Voir listes</span>
                           </Link></td>
                         </tr>
-                        <button type="button" className="btn btn-primary mr-2" onClick={handleNext}>
+                        <Link className="btn btn-primary mr-2" onClick={handleNext}>
                           Next
-                        </button>
+                        </Link>
                           </>
                           
                         )}
@@ -118,9 +118,9 @@ function Element() {
                             <span className="menu-title"> Voir listes</span>
                           </Link></td>
                         </tr>
-                        <button type="button" className="btn btn-secondary mr-2" onClick={handlePrev}>
-                          Previous
-                        </button>
+                        <Link className="btn btn-secondary mr-2" onClick={handlePrev}>
+                           Previous
+                        </Link>
                         </>
                        )}
                         
