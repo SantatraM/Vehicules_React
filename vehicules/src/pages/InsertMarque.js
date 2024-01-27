@@ -12,8 +12,7 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
 function InsertMarque() {
-<<<<<<< Updated upstream
-=======
+
   const [error, setError] = useState("");
     const [nom, setNom] = useState("");
     const [id_pays, setId_pays] = useState("");
@@ -52,8 +51,7 @@ function InsertMarque() {
         }
       });
   }, []);
-    
->>>>>>> Stashed changes
+
   return (
     <div className="container-scroller">
         <div className="container-fluid page-body-wrapper">
@@ -72,20 +70,13 @@ function InsertMarque() {
                                                 <input type="text" className="form-control" id="exampleInputUsername1" placeholder="nomMarque"/>
                                             </div>
                                             <div className="form-group ">
-<<<<<<< Updated upstream
-                                                <label >Pays</label>
-                                                
-                                                    <select className="form-control">
-                                                    <option>Madagascar</option>
-                                                    <option>France</option>
-=======
+
                                                 <label>Pays</label>
                                                     <select className="form-control" onChange={(e) => setId_pays(e.target.value)}>
                                                         {pays.map((country) => (
                                                             <option key={country.id}>{country.nomPays}</option>
                                                         ))}
                                                         
->>>>>>> Stashed changes
                                                     </select>
                                             </div>
                     

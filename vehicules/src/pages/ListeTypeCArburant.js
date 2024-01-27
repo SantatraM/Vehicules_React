@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
+import axios from 'axios'
 import ReactPaginate from 'react-paginate';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
@@ -16,8 +17,6 @@ import './css/pagination.css';
 function ListeTypeCArburant() {
   const [data, setData] = useState([]);
 
-<<<<<<< Updated upstream
-=======
   useEffect(() => {
     axios.get('http://localhost:8081/typecarburants')
       .then(response => {
@@ -30,8 +29,6 @@ function ListeTypeCArburant() {
       });
   }, []);
 
-
->>>>>>> Stashed changes
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
 

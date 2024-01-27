@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
+import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
@@ -14,19 +15,13 @@ import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeMarque() {
-  const [data, setData] = useState([
-    { name: 'Jacob', country: 'Photoshop' },
-    { name: 'Messy', country: 'Flash' },
-    { name: 'John', country: 'Premier' },
-    { name: 'Peter', country: 'After effects' },
-    { name: 'Dave', country: '53275535' },
-    { name: 'Dave', country: '53275535' },
+  const [data, setMarques] = useState([
   ]);
 
-<<<<<<< Updated upstream
+
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
-=======
+
   useEffect(() => {
     axios.get('http://localhost:8081/marques')
       .then(response => {
@@ -38,7 +33,6 @@ function ListeMarque() {
         }
       });
   }, []);
->>>>>>> Stashed changes
 
   const pageCount = Math.ceil(data.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;

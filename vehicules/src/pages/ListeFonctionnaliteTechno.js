@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
+import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
@@ -16,8 +17,6 @@ import './css/pagination.css';
 function ListeFonctionnaliteTechno() {
   const [fonctionnalite, setFonctionnalites] = useState([]);
 
-<<<<<<< Updated upstream
-=======
   useEffect(() => {
     axios.get('http://localhost:8081/fonctionnalite')
       .then(response => {
@@ -30,7 +29,6 @@ function ListeFonctionnaliteTechno() {
       });
   }, []);
 
->>>>>>> Stashed changes
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
 
