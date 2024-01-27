@@ -18,13 +18,12 @@ function InsertMarque() {
         e.preventDefault();
         try {
             await axios.post(
-                "http://localhost:8080/marque",
-                JSON.stringify({ nom, id_pays }),
+                "http://localhost:8080/marque/" + nom + "/" + id_pays,
                 {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 }
             );
         } catch (error) {

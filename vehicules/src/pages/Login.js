@@ -9,20 +9,31 @@ import logo from '../assets/images/logo.svg';
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [login, setEmail] = useState("");
+  const [motDePasse, setPass] = useState("");
   
   useEffect(() => {
     setError("");
-  }, [email, pass]);
+  }, [login, motDePasse]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      // AuthentificationService.login(email, pass, history);
+      const response = await axios.post(
+        "http://localhost:8080/initial/login",
+        JSON.stringify({ login, motDePasse }),
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // withCredentials: true,
+        }
+      );
     } catch (error) {
       if (!error?.response) {
         setError("No server Response");
@@ -46,17 +57,17 @@ function Login() {
               <h6 className="font-weight-light">Sign in to continue.</h6>
               <form className="pt-3" onSubmit={handleFormSubmit}>
                 <div className="form-group">
-                  <input type="email" className="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" onChange={(e) => setEmail(e.target.value)}/>
+                  <input type="email" className="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div className="form-group">
                   <input type="password" className="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password"
                           onChange={(e) => setPass(e.target.value)}/>
                 </div>
                 <div className="mt-3">
-                  <Link to='/element' className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</Link>
+                  <button className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
                 <div className="text-center mt-4 font-weight-light">
-                  Don't have an account? <a href="register.html" className="text-primary">Create</a>
+                  Don't have an account? <Link to="/" className="text-primary">Create</Link>
                 </div>
               </form>
             </div>

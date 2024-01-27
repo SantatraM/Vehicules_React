@@ -12,7 +12,7 @@ import REact, {useEffect , useState} from 'react';
 import axios from 'axios';
 
 function InsertFonctionnalite() {
-    const [nomfonctionnalite, setFonctionnalite] = useState("");
+    const [nomfonctionnalitetechnologique, setFonctionnalite] = useState("");
     const [error , setError] = useState("");
 
     const handleFormSubmit = async (e) => {
@@ -20,7 +20,7 @@ function InsertFonctionnalite() {
         try {
             await axios.post(
                 "http://localhost:8080/fonctionnalite",
-                JSON.stringify({ nomfonctionnalite }),
+                JSON.stringify({ nomfonctionnalitetechnologique }),
                 {
                     headers: {
                         "Content-Type": "application/json",
