@@ -1,3 +1,5 @@
+import React, { useState , useEffect } from 'react';
+import axios from 'axios';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
 import '../assets/css/vertical-layout-light/style.css';
@@ -7,11 +9,10 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import { useState } from 'react';
-import axios from 'axios';
 
 
 function InsertCategorie() {
+
     const [nomcategorie, setNomCategorie] = useState("");
     const [error, setError] = useState("");
 
@@ -58,6 +59,7 @@ function InsertCategorie() {
                                                 <button type="submit" className="btn btn-primary mr-2">Submit</button>
                                             </form>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -65,8 +67,8 @@ function InsertCategorie() {
                 </div>
             </div>
         </div>
-        
-    );
+    
+  );
 }
 
 export default InsertCategorie;

@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
 import '../assets/css/vertical-layout-light/style.css';
@@ -7,10 +9,9 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import REact, {useEffect , useState} from 'react';
-import axios from 'axios';
 
 function InsertMarque() {
+
   const [error, setError] = useState("");
     const [nom, setNom] = useState("");
     const [id_pays, setId_pays] = useState("");
@@ -34,6 +35,21 @@ function InsertMarque() {
             }
         }
     };
+
+    const [pays, setPays] = useState([]);
+
+    useEffect(() => {
+    axios.get('http://localhost:8080/pays')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setPays(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
+
   return (
     <div className="container-scroller">
         <div className="container-fluid page-body-wrapper">
@@ -53,11 +69,13 @@ function InsertMarque() {
                                                     onChange={(e) => setNom(e.target.value)}/>
                                             </div>
                                             <div className="form-group ">
+
                                                 <label>Pays</label>
-                                                
                                                     <select className="form-control" onChange={(e) => setId_pays(e.target.value)}>
-                                                        <option>Madagascar</option>
-                                                        <option>France</option>
+                                                        {pays.map((country) => (
+                                                            <option key={country.id}>{country.nomPays}</option>
+                                                        ))}
+                                                        
                                                     </select>
                                             </div>
                     

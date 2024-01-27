@@ -15,14 +15,19 @@ import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeTypeCArburant() {
-  const [data, setData] = useState([
-    { name: 'Jacob', country: 'Photoshop' },
-    { name: 'Messy', country: 'Flash' },
-    { name: 'John', country: 'Premier' },
-    { name: 'Peter', country: 'After effects' },
-    { name: 'Dave', country: '53275535' },
-    { name: 'Dave', country: '53275535' },
-  ]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8081/typecarburants')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setData(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
 
   useEffect(() => {
     axios.get('http://localhost:8080/typecarburants')
@@ -69,8 +74,8 @@ function ListeTypeCArburant() {
                   <tbody>
                     {displayedItems.map((item, index) => (
                       <tr key={index}>
-                        <td>{item.id}</td>
-                        <td>{item.nomTypeCarburant}</td>
+                        <td>{item.idtypecarburant}</td>
+                        <td>{item.nomtypecarburant}</td>
                         <td>
                             <Link to="" >
                             <button type="button" className="btn btn-success btn-rounded btn-icon">

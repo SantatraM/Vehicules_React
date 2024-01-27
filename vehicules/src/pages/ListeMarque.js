@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,10 @@ import Sidebar from '../components/Sidebar';
 import './css/pagination.css';
 
 function ListeMarque() {
-  const [marques, setMarques] = useState([]);
+  const [marques, setMarques] = useState([
+  ]);
+
+
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Nombre d'éléments par page
 
@@ -56,12 +59,14 @@ function ListeMarque() {
                         <td>{marque.id}</td>
                         <td>{marque.nom_Marque}</td>
                         <td>
-                          <Link to={`/edit-marque/${marque.id}`}>
+                            <Link to="" >
                             <button type="button" className="btn btn-success btn-rounded btn-icon">
                               <i className="typcn typcn-edit"></i>
                             </button>
-                          </Link>
-                          <Link to={`/delete-marque/${marque.id}`}>
+                            </Link>
+                        </td>
+                            <td>
+                            <Link to="" >
                             <button type="button" className="btn btn-danger btn-rounded btn-icon">
                               <i className="typcn typcn-trash"></i>
                             </button>

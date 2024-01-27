@@ -7,6 +7,7 @@ import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 function Inscription() {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ function Inscription() {
     sexe: "1",
     login: "",
     motDePasse: "",
-    role: "user",
+    role: "admin",
     adresse: "",
   });
 

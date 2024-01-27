@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState , useEffect } from 'react';
+import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
@@ -8,27 +9,19 @@ import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 
-import axios from 'axios';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeFonctionnaliteTechno() {
-  const [data, setData] = useState([
-    { name: 'Jacob', country: 'Photoshop' },
-    { name: 'Messy', country: 'Flash' },
-    { name: 'John', country: 'Premier' },
-    { name: 'Peter', country: 'After effects' },
-    { name: 'Dave', country: '53275535' },
-    { name: 'Dave', country: '53275535' },
-  ]);
+  const [fonctionnalite, setFonctionnalites] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:8080/fonctionnalite')
       .then(response => {
         if (Array.isArray(response.data.data)) {
-          setData(response.data.data);
+          setFonctionnalites(response.data.data);
           console.log(response.data.data);
         } else {
           console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
@@ -39,14 +32,14 @@ function ListeFonctionnaliteTechno() {
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
 
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  const pageCount = Math.ceil(fonctionnalite.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;
 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
 
-  const displayedItems = data.slice(offset, offset + itemsPerPage);
+  const displayedItems = fonctionnalite.slice(offset, offset + itemsPerPage);
 
   return (
     <div className="container-scroller">
@@ -66,10 +59,10 @@ function ListeFonctionnaliteTechno() {
                     </tr>
                   </thead>
                   <tbody>
-                    {displayedItems.map((item, index) => (
+                    {displayedItems.map((fonctionnalites, index) => (
                       <tr key={index}>
-                        <td>{item.name}</td>
-                        <td>{item.country}</td>
+                        <td>{fonctionnalites.idFonctionnaliteTechonologique}</td>
+                        <td>{fonctionnalites.nomfonctionnalitetechnologique}</td>
                         <td>
                             <Link to="" >
                             <button type="button" className="btn btn-success btn-rounded btn-icon">

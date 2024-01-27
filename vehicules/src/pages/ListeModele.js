@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
+import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
@@ -13,26 +14,31 @@ import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeModele() {
-  const [data, setData] = useState([
-    { name: 'Jacob', country: 'Photoshop' },
-    { name: 'Messy', country: 'Flash' },
-    { name: 'John', country: 'Premier' },
-    { name: 'Peter', country: 'After effects' },
-    { name: 'Dave', country: '53275535' },
-    { name: 'Dave', country: '53275535' },
-  ]);
+  const [models, setModeles] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8081/modeles')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setModeles(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
 
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
 
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  const pageCount = Math.ceil(models.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;
 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
 
-  const displayedItems = data.slice(offset, offset + itemsPerPage);
+  const displayedItems = models.slice(offset, offset + itemsPerPage);
 
   return (
     <div className="container-scroller">
@@ -53,11 +59,11 @@ function ListeModele() {
                     </tr>
                   </thead>
                   <tbody>
-                    {displayedItems.map((item, index) => (
+                    {displayedItems.map((modeles, index) => (
                       <tr key={index}>
-                        <td>{item.name}</td>
-                        <td>{item.country}</td>
-                        <td>{item.country}</td>
+                        <td>{modeles.id}</td>
+                        <td>{modeles.nomModele}</td>
+                        <td>{modeles.categorie}</td>
                         <td>
                             <Link to="" >
                             <button type="button" class="btn btn-success btn-rounded btn-icon">

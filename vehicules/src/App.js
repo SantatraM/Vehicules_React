@@ -33,6 +33,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element= {<Login/>} />
+        <Route path='/inscription' element= {<Inscription/>} />
         <Route path='/login' element={<Login/>}/>
         <Route path='/inscription' element={<Inscription/>}/>
         <Route path='/element' element = {<Element/>} />
