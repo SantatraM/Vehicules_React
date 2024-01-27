@@ -14,15 +14,24 @@ import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeTypeCArburant() {
-  const [data, setData] = useState([
-    { name: 'Jacob', country: 'Photoshop' },
-    { name: 'Messy', country: 'Flash' },
-    { name: 'John', country: 'Premier' },
-    { name: 'Peter', country: 'After effects' },
-    { name: 'Dave', country: '53275535' },
-    { name: 'Dave', country: '53275535' },
-  ]);
+  const [data, setData] = useState([]);
 
+<<<<<<< Updated upstream
+=======
+  useEffect(() => {
+    axios.get('http://localhost:8081/typecarburants')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setData(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
+
+
+>>>>>>> Stashed changes
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
 

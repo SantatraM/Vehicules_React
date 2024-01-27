@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
 import '../assets/css/vertical-layout-light/style.css';
@@ -10,6 +12,48 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
 function InsertMarque() {
+<<<<<<< Updated upstream
+=======
+  const [error, setError] = useState("");
+    const [nom, setNom] = useState("");
+    const [id_pays, setId_pays] = useState("");
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post(
+                "http://localhost:8080/marque",
+                JSON.stringify({ nom, id_pays }),
+                {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                }
+            );
+        } catch (error) {
+            if (!error?.response) {
+                setError("No server Response");
+            } else {
+                setError("Registration failed");
+            }
+        }
+    };
+
+    const [pays, setPays] = useState([]);
+
+    useEffect(() => {
+    axios.get('http://localhost:8081/pays')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setPays(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
+    
+>>>>>>> Stashed changes
   return (
     <div className="container-scroller">
         <div className="container-fluid page-body-wrapper">
@@ -28,11 +72,20 @@ function InsertMarque() {
                                                 <input type="text" className="form-control" id="exampleInputUsername1" placeholder="nomMarque"/>
                                             </div>
                                             <div className="form-group ">
+<<<<<<< Updated upstream
                                                 <label >Pays</label>
                                                 
                                                     <select className="form-control">
                                                     <option>Madagascar</option>
                                                     <option>France</option>
+=======
+                                                <label>Pays</label>
+                                                    <select className="form-control" onChange={(e) => setId_pays(e.target.value)}>
+                                                        {pays.map((country) => (
+                                                            <option key={country.id}>{country.nomPays}</option>
+                                                        ))}
+                                                        
+>>>>>>> Stashed changes
                                                     </select>
                                             </div>
                     

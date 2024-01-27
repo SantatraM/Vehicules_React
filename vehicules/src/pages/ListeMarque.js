@@ -23,8 +23,22 @@ function ListeMarque() {
     { name: 'Dave', country: '53275535' },
   ]);
 
+<<<<<<< Updated upstream
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
+=======
+  useEffect(() => {
+    axios.get('http://localhost:8081/marques')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setMarques(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
+>>>>>>> Stashed changes
 
   const pageCount = Math.ceil(data.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;

@@ -14,26 +14,34 @@ import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeFonctionnaliteTechno() {
-  const [data, setData] = useState([
-    { name: 'Jacob', country: 'Photoshop' },
-    { name: 'Messy', country: 'Flash' },
-    { name: 'John', country: 'Premier' },
-    { name: 'Peter', country: 'After effects' },
-    { name: 'Dave', country: '53275535' },
-    { name: 'Dave', country: '53275535' },
-  ]);
+  const [fonctionnalite, setFonctionnalites] = useState([]);
 
+<<<<<<< Updated upstream
+=======
+  useEffect(() => {
+    axios.get('http://localhost:8081/fonctionnalite')
+      .then(response => {
+        if (Array.isArray(response.data.data)) {
+          setFonctionnalites(response.data.data);
+          console.log(response.data.data);
+        } else {
+          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+        }
+      });
+  }, []);
+
+>>>>>>> Stashed changes
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
 
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  const pageCount = Math.ceil(fonctionnalite.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;
 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
 
-  const displayedItems = data.slice(offset, offset + itemsPerPage);
+  const displayedItems = fonctionnalite.slice(offset, offset + itemsPerPage);
 
   return (
     <div className="container-scroller">
@@ -53,10 +61,10 @@ function ListeFonctionnaliteTechno() {
                     </tr>
                   </thead>
                   <tbody>
-                    {displayedItems.map((item, index) => (
+                    {displayedItems.map((fonctionnalites, index) => (
                       <tr key={index}>
-                        <td>{item.name}</td>
-                        <td>{item.country}</td>
+                        <td>{fonctionnalites.idFonctionnaliteTechonologique}</td>
+                        <td>{fonctionnalites.nomfonctionnalitetechnologique}</td>
                         <td>
                             <Link to="" >
                             <button type="button" class="btn btn-success btn-rounded btn-icon">
