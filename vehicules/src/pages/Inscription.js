@@ -12,7 +12,7 @@ function Inscription() {
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
-    dateNaissance: "",
+    datenaissance: "",
     sexe: "1",
     login: "",
     motDePasse: "",
@@ -27,8 +27,8 @@ function Inscription() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const history = useHistory();
-    AuthentificationService.register(formData, history);
+    console.log(formData);
+    await axios.post( "http://localhost:8080/initial/inscription", formData );
   };
 
 
@@ -71,13 +71,12 @@ function Inscription() {
                           type="date"
                           className="form-control form-control-lg"
                           placeholder="Date de Naissance"
-                          name="dateNaissance"
-                          value={formData.dateNaissance}
+                          name="datenaissance"
+                          value={formData.datenaissance}
                           onChange={handleInputChange}
                         />
                       </div>
                       <div className="form-group col-md-6">
-                        <label>Sous Modele</label>
                         <select
                           className="form-control"
                           name="sexe"
@@ -128,7 +127,7 @@ function Inscription() {
                       </div>
                       <div className="mt-3">
                         <Link
-                          to={"/home"}
+                          to={"/login"}
                           className="btn btn-block btn-secondary btn-lg font-weight-medium auth-form-btn"
                         >
                           RETOUR

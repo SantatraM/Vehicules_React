@@ -67,7 +67,7 @@ function Login() {
                   <button className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
                 <div className="text-center mt-4 font-weight-light">
-                  Don't have an account? <Link to="/" className="text-primary">Create</Link>
+                  Don't have an account? <Link to="/inscription" className="text-primary">Create</Link>
                 </div>
               </form>
             </div>
