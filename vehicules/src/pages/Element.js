@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
 import '../assets/css/vertical-layout-light/style.css';
-import '../assets/vendors/progressbar.js/progressbar.min';
 import '../assets/js/hoverable-collapse.js';
 import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
@@ -87,9 +86,9 @@ function Element() {
                             <span className="menu-title"> Voir listes</span>
                           </Link></td>
                         </tr>
-                        <button type="button" className="btn btn-primary mr-2" onClick={handleNext}>
+                        <Link className="btn btn-primary mr-2" onClick={handleNext}>
                           Next
-                        </button>
+                        </Link>
                           </>
                           
                         )}
@@ -119,9 +118,9 @@ function Element() {
                             <span className="menu-title"> Voir listes</span>
                           </Link></td>
                         </tr>
-                        <button type="button" className="btn btn-secondary mr-2" onClick={handlePrev}>
-                          Previous
-                        </button>
+                        <Link className="btn btn-secondary mr-2" onClick={handlePrev}>
+                           Previous
+                        </Link>
                         </>
                        )}
                         

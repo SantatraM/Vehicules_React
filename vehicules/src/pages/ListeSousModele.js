@@ -69,15 +69,15 @@ function ListeSousModele() {
                         <td>{item.reglage}</td>
                         <td>
                             <Link to="" >
-                            <button type="button" class="btn btn-success btn-rounded btn-icon">
-                              <i class="typcn typcn-edit"></i>
+                            <button type="button" className="btn btn-success btn-rounded btn-icon">
+                              <i className="typcn typcn-edit"></i>
                             </button>
                             </Link>
                         </td>
                             <td>
                             <Link to="" >
-                            <button type="button" class="btn btn-danger btn-rounded btn-icon">
-                              <i class="typcn typcn-trash"></i>
+                            <button type="button" className="btn btn-danger btn-rounded btn-icon">
+                              <i className="typcn typcn-trash"></i>
                             </button>
                             </Link>
                         </td>

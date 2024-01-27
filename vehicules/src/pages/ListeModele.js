@@ -48,7 +48,7 @@ function ListeModele() {
         <Sidebar />
         <div className="col-lg-6 grid-margin stretch-card mx-auto">
           <div className="card">
-            <div className="card-body">marques
+            <div className="card-body">
               <h4 className="card-title">Liste des modeles</h4>
               <div className="table-responsive">
                 <table className="table table-hover">
