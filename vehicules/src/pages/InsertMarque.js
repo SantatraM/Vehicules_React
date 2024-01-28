@@ -11,15 +11,17 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
 function InsertMarque() {
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
-  const [error, setError] = useState("");
-    const [nom, setNom] = useState("");
-    const [id_pays, setId_pays] = useState("");
+    const [nomMarque, setNomMarque] = useState("");
+    const [idPays, setId_pays] = useState("");
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(
-                "http://localhost:8080/marque/" + nom + "/" + id_pays,
+            const response = await axios.post(
+                "http://localhost:8080/marque", JSON.stringify({ nomMarque, idPays }), 
                 {
                     method: "POST",
                     headers: {
@@ -27,11 +29,14 @@ function InsertMarque() {
                     },
                 }
             );
+            if (response != null) {
+                setSuccess(response);
+            }
         } catch (error) {
-            if (!error?.response) {
-                setError("No server Response");
+            if (error.response && error.response.data && error.response.data.erreur) {
+                setError(error.response.data.erreur);
             } else {
-                setError("Registration failed");
+                setError("Une erreur inattendue s'est produite.");
             }
         }
     };
@@ -66,7 +71,7 @@ function InsertMarque() {
                                             <div className="form-group">
                                                 <label >Marque</label>
                                                 <input type="text" className="form-control" id="exampleInputUsername1" placeholder="nomMarque"
-                                                    onChange={(e) => setNom(e.target.value)}/>
+                                                    onChange={(e) => setNomMarque(e.target.value)}/>
                                             </div>
                                             <div className="form-group ">
 
@@ -78,6 +83,8 @@ function InsertMarque() {
                                                         
                                                     </select>
                                             </div>
+                                                      {error && <p style={{ color: 'red' }}>{error}</p>}
+                                                      {success && <p style={{ color: 'green' }}>{success}</p>}
                     
                                             <button type="submit" className="btn btn-primary mr-2">Submit</button>
                                         </form>

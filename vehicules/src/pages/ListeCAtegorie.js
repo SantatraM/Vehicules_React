@@ -25,7 +25,7 @@ function ListeCategorie() {
 
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:8081/categories')
+    axios.get('http://localhost:8080/categories')
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setCategories(response.data.data);

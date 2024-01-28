@@ -12,13 +12,38 @@ import REact, {useEffect , useState} from 'react';
 import axios from 'axios';
 
 function InsertModele() {
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
     const [marques, setMarque] = useState([]);
     const [categories, setCategorie] = useState([]);
 
-    const listeMarque = axios.get('http://localhost:8080/marques').data.data;
-    setMarque(listeMarque);
-    const listeCategorie = axios.get('http://localhost:8080/categories').data.data;
-    setCategorie(listeCategorie);
+    useEffect(() => {
+        try {
+            axios.get('http://localhost:8080/marques').then(response => {
+            if (Array.isArray(response.data.data)) {
+                setMarque(response.data.data);
+                console.log(response.data.data);
+            } else {
+                console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+            }
+            });
+            axios.get('http://localhost:8080/categories').then(response => {
+            if (Array.isArray(response.data.data)) {
+                setCategorie(response.data.data);
+                console.log(response.data.data);
+            } else {
+                console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
+            }
+            })
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.erreur) {
+                setError(error.response.data.erreur);
+            } else {
+                console.log(error);
+                setError("Une erreur inattendue s'est produite.");
+            }
+        }
+    }, []); 
 
     const [id_marque, setId_marque] = useState ("");
     const [id_categorie, setId_categorie] = useState ("");
@@ -42,30 +67,31 @@ function InsertModele() {
                                         <h4 className="card-title">Insertion Modele</h4>
                                             <form className="forms-sample" onSubmit={handleFormSubmit}>
                                                 <div className="form-group">
-                                                    <label for="exampleInputUsername1">Modele</label>
+                                                    <label>Modele</label>
                                                     <input type="text" className="form-control" id="exampleInputUsername1" name="modele" placeholder="nomModele"/>
                                                 </div>
                                                 <div className="form-group ">
-                                                    <label for="exampleInputUsername1">Marque</label>
+                                                    <label>Marque</label>
                                                     <select className="form-control" onChange={(e) => setId_marque(e.target.value)}>
                                                         {marques.map((marque) => (
                                                             <option key={marque.id} value={marque.id}>
-                                                                {marque.nom_marque}
+                                                                {marque.nom_Marque}
                                                             </option>
                                                         ))}
                                                     </select>
                                                 </div>
                                                 <div className="form-group ">
-                                                    <label for="exampleInputUsername1">Categorie</label>
+                                                    <label>Categorie</label>
                                                     <select className="form-control" onChange={(e) => setId_categorie(e.target.value)}>
                                                         {categories.map((categorie) => (
                                                         <option key={categorie.id} value={categorie.id}>
-                                                            {categorie.nom_categorie}
+                                                            {categorie.id}
                                                         </option>
                                                         ))}
                                                     </select>
                                                 </div>
-                        
+                                                      {error && <p style={{ color: 'red' }}>{error}</p>}
+                                                      {success && <p style={{ color: 'green' }}>{success}</p>}
                                                 <button type="submit" className="btn btn-primary mr-2">Submit</button>
                                             </form>
                                     </div>

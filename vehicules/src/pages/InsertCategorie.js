@@ -15,11 +15,12 @@ function InsertCategorie() {
 
     const [nomcategorie, setNomCategorie] = useState("");
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(
+            const response = await axios.post(
                 "http://localhost:8080/categorie",
                 JSON.stringify({ nomcategorie }),
                 {
@@ -28,13 +29,14 @@ function InsertCategorie() {
                     },
                 }
             );
+            if (response.data.data != null) {
+                setSuccess("Categorie "+ response.data.data.idCategorie +"inséré avec succès !");
+            }
         } catch (error) {
-            if (error.response) {
-                console.error("Error response from server:", error.response.data);
-                setError("Registration failed");
+            if (error.response && error.response.data && error.response.data.erreur) {
+                setError(error.response.data.erreur);
             } else {
-                console.error("No server response:", error.message);
-                setError("No server response");
+                setError("Une erreur inattendue s'est produite.");
             }
         }
     };
@@ -56,6 +58,8 @@ function InsertCategorie() {
                                                     <label>Categorie</label>
                                                     <input type="text" className="form-control" id="exampleInputUsername1" name='categorie' placeholder="nomCategorie" onChange={(e) => setNomCategorie(e.target.value)}/>
                                                 </div>
+                                                      {error && <p style={{ color: 'red' }}>{error}</p>}
+                                                      {success && <p style={{ color: 'green' }}>{success}</p>}
                                                 <button type="submit" className="btn btn-primary mr-2">Submit</button>
                                             </form>
                                     </div>
