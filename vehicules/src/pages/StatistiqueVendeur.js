@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
+
 import axios from 'axios';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
