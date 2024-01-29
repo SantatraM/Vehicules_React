@@ -9,10 +9,13 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 function InsertMarque() {
+    const token = localStorage.getItem("token");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const navigate = useNavigate();
 
     const [nomMarque, setNomMarque] = useState("");
     const [idPays, setId_pays] = useState("");
@@ -54,6 +57,10 @@ function InsertMarque() {
         }
       });
   }, []);
+
+    if (!token) {
+        navigate('/login');
+    }
 
   return (
     <div className="container-scroller">
