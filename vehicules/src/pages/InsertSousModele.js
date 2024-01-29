@@ -30,8 +30,8 @@ function InsertSousModele() {
     setStep(step - 1);
   };
 
-  const modeles = axios.get('http://localhost:8080/modeles').data.data;
-  const carburants = axios.get('http://localhost:8080/typecarburants').data.data;
+  const modeles = axios.get('http://localhost:8081/modeles').data.data;
+  const carburants = axios.get('http://localhost:8081/typecarburants').data.data;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

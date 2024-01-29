@@ -8,7 +8,7 @@ import '../assets/js/hoverable-collapse.js';
 import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
-import '../assets/vendors/mdi/css/materialdesignicons.min.css';
+// import '../assets/vendors/mdi/css/materialdesignicons.min.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
@@ -18,7 +18,7 @@ function ListeAnnonceNonValide() {
  
   const [annonces , setAnnonces] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:8081/annoncesNonValides')
+    axios.get('http://localhost:8081/annonce/aValider')
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setAnnonces(response.data.data);

@@ -15,7 +15,7 @@ function ListeMarque() {
   const itemsPerPage = 5; // Nombre d'éléments par page
 
   useEffect(() => {
-    axios.get('http://localhost:8080/marques')
+    axios.get('http://localhost:8081/marques')
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setMarques(response.data.data);

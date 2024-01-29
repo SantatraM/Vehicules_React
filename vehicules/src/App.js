@@ -20,15 +20,12 @@ import ListeSousModele from './pages/ListeSousModele';
 import ListeAnnonceNonValide from './pages/ListeAnnonceNonValide';
 import Login from './pages/Login';
 import Inscription from './pages/Inscription';
+import MeilleurVendeur from './pages/MeilleurVendeur';
+import StatistiqueVendeur from './pages/StatistiqueVendeur';
+import MeilleurMarque from './pages/MeilleurMarque';
+import StatistiqueMarque from './pages/StatistiqueMarque';
 
 function App() {
-  const topSellersData = [
-    { seller: 'Vendeur1', sales: 100 },
-    { seller: 'Vendeur2', sales: 90 },
-    { seller: 'Vendeur3', sales: 80 },
-    { seller: 'Vendeur4', sales: 70 },
-    { seller: 'Vendeur5', sales: 60 },
-  ];
   return (
     <>
       <Routes>
@@ -52,7 +49,11 @@ function App() {
         <Route path='/listeModele' element={<ListeModele/>}/>
         <Route path='/listeSousModele' element={<ListeSousModele/>}/>
         <Route path='/listeAnnonce' element={<ListeAnnonceNonValide/>}/> 
-      </Routes>
+        <Route path='/insert-meilleur-vendeur' element={<MeilleurVendeur/>}/>
+        <Route path='/statVendeur' element={<StatistiqueVendeur/>}/>
+        <Route path='/insert-meilleur-marque' element={<MeilleurMarque/>}/>
+        <Route path='/statMarque' element={<StatistiqueMarque/>}/>
+        </Routes>
     </>
   );
 }

@@ -29,18 +29,6 @@ function ListeTypeCArburant() {
       });
   }, []);
 
-  useEffect(() => {
-    axios.get('http://localhost:8080/typecarburants')
-      .then(response => {
-        if (Array.isArray(response.data.data)) {
-          setData(response.data.data);
-          console.log(response.data.data);
-        } else {
-          console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
-        }
-      });
-  }, []);
-
 
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page

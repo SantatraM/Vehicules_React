@@ -20,7 +20,7 @@ function InsertFonctionnalite() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:8080/fonctionnalite",
+                "http://localhost:8081/fonctionnalite",
                 JSON.stringify({ nomFonctionnaliteTechnologique }),
                 {
                     headers: {

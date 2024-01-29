@@ -21,7 +21,7 @@ function InsertCategorie() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:8080/categorie",
+                "http://localhost:8081/categorie",
                 JSON.stringify({ nomcategorie }),
                 {
                     headers: {

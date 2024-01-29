@@ -18,7 +18,7 @@ function ListeFonctionnaliteTechno() {
   const [fonctionnalite, setFonctionnalites] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/fonctionnalite')
+    axios.get('http://localhost:8081/fonctionnalite')
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setFonctionnalites(response.data.data);

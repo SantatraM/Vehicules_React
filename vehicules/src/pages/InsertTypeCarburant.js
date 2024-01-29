@@ -27,7 +27,7 @@ function InsertTypeCarburant() {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        await axios.post( "http://localhost:8080/typecarburant", JSON.stringify({ typeCarburant }), { headers });
+        await axios.post( "http://localhost:8081/typecarburant", JSON.stringify({ typeCarburant }), { headers });
     };
 
     return (

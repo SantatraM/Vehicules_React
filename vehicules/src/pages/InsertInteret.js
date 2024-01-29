@@ -10,16 +10,13 @@ import Sidebar from '../components/Sidebar';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import REact, {useEffect , useState} from 'react';
-import axios from 'axios';
-
 function InsertInteret() {
     const [taux, setTaux] = useState("");
     const [error , setError] = useState("");
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        await axios.post( "http://localhost:8080/interet", JSON.stringify({ taux }));
+        await axios.post( "http://localhost:8081/interet", JSON.stringify({ taux }));
     };
 
     return (
