@@ -68,7 +68,7 @@ function InsertModele() {
         try {
             const formdata = JSON.stringify({ idmarque, nommodele, idcategorie });
             console.log(formdata);
-            const response = await axios.post("http:localhot:8080/modele", formdata, { headers });
+            const response = await axios.post("http://localhost:8080/modele", formdata, { headers });
             if (response.data.data != null) {
                 setSuccess("Categorie "+ response.data.data.id +"inséré avec succès !");
             }
