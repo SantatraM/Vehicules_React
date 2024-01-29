@@ -11,15 +11,25 @@ import '../assets/js/todolist.js';
 import '../assets/vendors/mdi/css/materialdesignicons.min.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import './css/pagination.css';
 
 const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function ListeAnnonceNonValide() {
+  const token = sessionStorage.getItem('token');
+  const navigate = useNavigate();
  
+    if( !token ) {
+        navigate('/login');
+    }
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
+
   const [annonces , setAnnonces] = useState([]);
   useEffect(() => {
-    axios.post(Api_url+'/annonce/Avalide')
+    axios.post(Api_url+'/annonce/Avalide', { headers })
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setAnnonces(response.data.data);
