@@ -8,7 +8,7 @@ import '../assets/js/hoverable-collapse.js';
 import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
-// import '../assets/vendors/mdi/css/materialdesignicons.min.css';
+import '../assets/vendors/mdi/css/materialdesignicons.min.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
@@ -57,7 +57,9 @@ function ListeAnnonceNonValide() {
                     <thead>
                       <tr>
                         <th>Utilisateur</th>
-                        <th>Modele</th>
+                        <th>Couleur</th>
+                        <th>Marque</th>
+                        <th>Sous modele</th>
                         <th>prix</th>
                         <th>date annonce</th>
                         <th></th>
@@ -67,8 +69,10 @@ function ListeAnnonceNonValide() {
                     <tbody>
                         {displayedItems.map((annonce, index) => (
                         <tr key={index}>
-                            <td>{annonce.utilisateur}</td>
-                            <td>{annonce.sousModele}</td>
+                            <td>{annonce.utilisateur.nomUtilisateur}</td>
+                            <td>{annonce.couleur}</td>
+                            <td>{annonce.sousModele.modele.marque.nom_Marque}</td>
+                            <td>{annonce.sousModele.nomSous}</td>
                             <td>{annonce.prix}</td>
                             <td>{annonce.dateAnnonce}</td>
                             <td>
