@@ -19,7 +19,7 @@ function ListeAnnonceNonValide() {
  
   const [annonces , setAnnonces] = useState([]);
   useEffect(() => {
-    axios.post(+Api_url+'/annonce/Avalide')
+    axios.post(Api_url+'/annonce/Avalide')
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setAnnonces(response.data.data);
