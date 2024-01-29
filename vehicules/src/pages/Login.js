@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function Login() {
   const [error, setError] = useState("");
   const [login, setEmail] = useState("Mamy@gmail.com");
@@ -31,7 +32,7 @@ function Login() {
     // formData.append('motDePasse', e.target.motDePasse.value);
     console.log(formData);
     try {
-      const response = await axios.post("http://localhost:8080/initial/login", formData,
+      const response = await axios.post(Api_url+"/initial/login", formData,
       {
         headers: {
           'Content-Type': 'application/json',

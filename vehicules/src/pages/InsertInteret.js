@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function InsertInteret() {
     const token = sessionStorage.getItem("token");
     const [taux, setTaux] = useState("");
@@ -32,7 +32,7 @@ function InsertInteret() {
         e.preventDefault();
 
         try {
-            const response = await axios.post( "http://localhost:8080/interet", JSON.stringify({ taux }), { headers });
+            const response = await axios.post( Api_url+"/interet", JSON.stringify({ taux }), { headers });
             if (response.data.data != null) {
                 setSuccess("Interet inséré avec succès !");
             }

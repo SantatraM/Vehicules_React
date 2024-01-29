@@ -13,7 +13,7 @@ import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './css/pagination.css';
-
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function ListeModele() {
   const [models, setModeles] = useState([]);
   const token = sessionStorage.getItem('token');
@@ -28,7 +28,7 @@ function ListeModele() {
     };
 
   useEffect(() => {
-    axios.get('http://localhost:8080/modeles', { headers})
+    axios.get(+Api_url+'/modeles', { headers})
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setModeles(response.data.data);

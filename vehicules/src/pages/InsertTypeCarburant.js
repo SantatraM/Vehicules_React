@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function InsertTypeCarburant() {
     const [typeCarburant, setTypeCarburant] = useState ("");
     const [error , setError] = useState("");
@@ -30,7 +31,7 @@ function InsertTypeCarburant() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post( "http://localhost:8080/typecarburant", JSON.stringify({ typeCarburant }), { headers });  
+            const response = await axios.post( Api_url+"/typecarburant", JSON.stringify({ typeCarburant }), { headers });  
             if (response != null) {
                 setSuccess(response);
             }

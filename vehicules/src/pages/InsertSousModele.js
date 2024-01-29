@@ -11,6 +11,7 @@ import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function InsertSousModele() {
     const [modeles, setModeles] = useState([]);
     const [carburants, setCarburants] = useState([]);
@@ -48,8 +49,8 @@ function InsertSousModele() {
 
   useEffect(() => {
     try {
-      axios.get('http://localhost:8080/modeles', { headers }).then(response => {setModeles(response.data.data)});
-      axios.get('http://localhost:8080/typecarburants', { headers }).then(response => {setCarburants(response.data.data)});
+      axios.get(Api_url+'/modeles', { headers }).then(response => {setModeles(response.data.data)});
+      axios.get(Api_url+'/typecarburants', { headers }).then(response => {setCarburants(response.data.data)});
 
     } catch (error) {
       if (error.response && error.response.data && error.response.data.erreur) {
@@ -70,7 +71,7 @@ function InsertSousModele() {
         e.preventDefault();
         try {
             console.log(JSON.stringify({ formData }));
-            const response = await axios.post("http://localhost:8080/sousmodele", JSON.stringify({ formData }), {headers});
+            const response = await axios.post(Api_url+"/sousmodele", JSON.stringify({ formData }), {headers});
             if (response.data.data != null) {
                 setSuccess("Categorie "+ response.data.data.id +"inséré avec succès !");
             }

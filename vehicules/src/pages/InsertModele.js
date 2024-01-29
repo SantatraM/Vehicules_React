@@ -12,6 +12,7 @@ import {useEffect , useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function InsertModele() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -31,7 +32,7 @@ function InsertModele() {
     useEffect(() => {
         try {
 
-            axios.get('http://localhost:8080/marques', { headers }).then(response => {
+            axios.get(Api_url+'/marques', { headers }).then(response => {
 
             if (Array.isArray(response.data.data)) {
                 setMarque(response.data.data);
