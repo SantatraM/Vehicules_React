@@ -79,14 +79,6 @@ function Element() {
                             <span className="menu-title"> Voir listes</span>
                           </Link></td>
                         </tr>
-                        <tr>
-                          <td>Choix Fonctionnalite Technologique</td>
-                          <td>
-                          <Link to="/insert-ChoixFonctionnalite" className="badge badge-danger">
-                            <i className="typcn typcn-briefcase menu-icon"></i>
-                            <span className="menu-title"> Voir listes</span>
-                          </Link></td>
-                        </tr>
                         <Link className="btn btn-primary mr-2" onClick={handleNext}>
                           Next
                         </Link>
