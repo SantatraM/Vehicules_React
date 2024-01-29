@@ -7,9 +7,11 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
 
 function InsertInteret() {
     const token = sessionStorage.getItem("token");
@@ -28,6 +30,7 @@ function InsertInteret() {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+
         try {
             const response = await axios.post( "http://localhost:8080/interet", JSON.stringify({ taux }), { headers });
             if (response.data.data != null) {

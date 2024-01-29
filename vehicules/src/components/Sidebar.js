@@ -22,7 +22,6 @@ const Sidebar = () => {
               </li>
 
               <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
                 <Link to="/element" className="nav-link">
                   <i className="typcn typcn-briefcase menu-icon"></i>
                   <span className="menu-title"> Element</span>
@@ -30,15 +29,20 @@ const Sidebar = () => {
               </li>
 
               <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
-                <Link to="" className="nav-link">
+                <Link to="/insert-meilleur-vendeur" className="nav-link">
                   <i className="typcn typcn-briefcase menu-icon"></i>
-                  <span className="menu-title"> Statistiques</span>
+                  <span className="menu-title"> Stat meilleurs vendeurs</span>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to="/insert-meilleur-marque" className="nav-link">
+                  <i className="typcn typcn-briefcase menu-icon"></i>
+                  <span className="menu-title"> Stat meilleurs marques</span>
                 </Link>
               </li>
               
               <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
                 <Link to="/listeAnnonce" className="nav-link">
                   <i className="typcn typcn-briefcase menu-icon"></i>
                   <span className="menu-title"> Annonces</span>
@@ -46,7 +50,6 @@ const Sidebar = () => {
               </li>
 
               <li className="nav-item">
-                {/* Utilisez le composant Link pour créer le lien */}
                 <Link to="/login" className="nav-link">
                   <i className="typcn typcn-briefcase menu-icon"></i>
                   <span className="menu-title">Logout</span>

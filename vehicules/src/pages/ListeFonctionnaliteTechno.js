@@ -29,7 +29,9 @@ function ListeFonctionnaliteTechno() {
     };
 
   useEffect(() => {
+
     axios.get('http://localhost:8080/fonctionnalite', {headers})
+
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setFonctionnalites(response.data.data);

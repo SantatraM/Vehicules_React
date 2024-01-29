@@ -28,7 +28,7 @@ function InsertMarque() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:8080/marque", JSON.stringify({ nomMarque, idPays }), 
+                "http://localhost:8081/marque", JSON.stringify({ nomMarque, idPays }), 
                 {
                     method: "POST",
                     headers: {

@@ -30,7 +30,9 @@ function InsertModele() {
 
     useEffect(() => {
         try {
+
             axios.get('http://localhost:8080/marques', { headers }).then(response => {
+
             if (Array.isArray(response.data.data)) {
                 setMarque(response.data.data);
                 console.log(response.data.data);
@@ -38,7 +40,9 @@ function InsertModele() {
                 console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
             }
             });
+
             axios.get('http://localhost:8080/categories', { headers }).then(response => {
+
             if (Array.isArray(response.data.data)) {
                 setCategorie(response.data.data);
                 console.log(response.data.data);

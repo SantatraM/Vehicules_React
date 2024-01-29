@@ -1,4 +1,9 @@
-import { Route ,Routes } from 'react-router-dom';
+
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+
+import { BrowserRouter as Router, Route ,Routes } from 'react-router-dom';
+
 import InsertMarque from './pages/InsertMarque';
 import InsertCategorie from './pages/InsertCategorie';
 // import Ensemble from './pages/Ensemble';
@@ -18,6 +23,10 @@ import ListeSousModele from './pages/ListeSousModele';
 import ListeAnnonceNonValide from './pages/ListeAnnonceNonValide';
 import Login from './pages/Login';
 import Inscription from './pages/Inscription';
+import MeilleurVendeur from './pages/MeilleurVendeur';
+import StatistiqueVendeur from './pages/StatistiqueVendeur';
+import MeilleurMarque from './pages/MeilleurMarque';
+import StatistiqueMarque from './pages/StatistiqueMarque';
 
 function App() {
   return (
@@ -43,7 +52,11 @@ function App() {
         <Route path='/listeModele' element={<ListeModele/>}/>
         <Route path='/listeSousModele' element={<ListeSousModele/>}/>
         <Route path='/listeAnnonce' element={<ListeAnnonceNonValide/>}/> 
-      </Routes>
+        <Route path='/insert-meilleur-vendeur' element={<MeilleurVendeur/>}/>
+        <Route path='/statVendeur' element={<StatistiqueVendeur/>}/>
+        <Route path='/insert-meilleur-marque' element={<MeilleurMarque/>}/>
+        <Route path='/statMarque' element={<StatistiqueMarque/>}/>
+        </Routes>
     </>
   );
 }

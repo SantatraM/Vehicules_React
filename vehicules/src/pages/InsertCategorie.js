@@ -26,7 +26,10 @@ function InsertCategorie() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
+
+
             const response = await axios.post("http://localhost:8080/categorie", JSON.stringify({ nomCategorie }), {headers});
+
             if (response.data.data != null) {
                 setSuccess("Categorie "+ response.data.data.id +"inséré avec succès !");
             }

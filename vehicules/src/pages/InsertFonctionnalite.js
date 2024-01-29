@@ -31,8 +31,10 @@ function InsertFonctionnalite() {
         e.preventDefault();
         try {
             const response = await axios.post(
+
                 "http://localhost:8080/fonctionnalite",
                 JSON.stringify({ nomFonctionnaliteTechnologique }), { headers }
+
             );
             if (response.data.data != null) {
                 setSuccess("Interet "+ response.data.data.idFonctionnaliteTechnologique +"inséré avec succès !");
