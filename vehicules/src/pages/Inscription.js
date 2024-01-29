@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
+
 function Inscription() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -34,7 +36,7 @@ function Inscription() {
     e.preventDefault();
     console.log(JSON.stringify(formData));
     try {
-      const response = await axios.post( "http://localhost:8080/initial/inscription", formData,
+      const response = await axios.post(Api_url + "/initial/inscription", formData,
       {
         headers: {
           'Content-Type': 'application/json',
