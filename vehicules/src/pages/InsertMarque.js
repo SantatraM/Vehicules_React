@@ -20,25 +20,24 @@ function InsertMarque() {
     const [nomMarque, setNomMarque] = useState("");
     const [idPays, setId_pays] = useState("");
 
-    if( !token ) {
+    if( token == null ) {
         navigate('/login');
+    } else {
+        console.log(token);
     }
+
+    const headers = {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+    };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(
-                "http://localhost:8080/marque", JSON.stringify({ nomMarque, idPays }), 
-                {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            if (response != null) {
-                setSuccess(response);
+            const response = await axios.post("http://localhost:8080/marque", JSON.stringify({ nomMarque, idPays }), {headers});
+            if (response.data != null) {
+                console.log(response);
+                setSuccess(response.data);
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.erreur) {
@@ -52,7 +51,7 @@ function InsertMarque() {
     const [pays, setPays] = useState([]);
 
     useEffect(() => {
-    axios.get('http://localhost:8080/pays')
+    axios.get('http://localhost:8080/pays', {headers})
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setPays(response.data.data);

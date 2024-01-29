@@ -14,8 +14,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [error, setError] = useState("");
-  const [login, setEmail] = useState("");
-  const [motDePasse, setPass] = useState("");
+  const [login, setEmail] = useState("Mamy@gmail.com");
+  const [motDePasse, setPass] = useState("1");
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -68,10 +68,10 @@ function Login() {
               <h6 className="font-weight-light">Sign in to continue.</h6>
               <form className="pt-3" onSubmit={handleFormSubmit} encType="application/x-www-form-urlencoded">
                 <div className="form-group">
-                  <input type="email" className="form-control form-control-lg" name="login" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+                  <input type="email" className="form-control form-control-lg" name="login" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value ={login}/>
                 </div>
                 <div className="form-group">
-                  <input type="password" className="form-control form-control-lg" name="motDePasse" placeholder="Password"
+                  <input type="password" className="form-control form-control-lg" name="motDePasse" placeholder="Password" value={motDePasse}
                           onChange={(e) => setPass(e.target.value)}/>
                 </div>
                 {error && <p style={{ color: 'red' }}>{error}</p>}

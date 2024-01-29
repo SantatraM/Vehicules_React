@@ -35,7 +35,7 @@ function InsertFonctionnalite() {
                 JSON.stringify({ nomFonctionnaliteTechnologique }), { headers }
             );
             if (response.data.data != null) {
-                setSuccess("Interet "+ response.data.data.idFonctionnaliteTechnologique +"inséré avec succès !");
+                setSuccess("La fonctionnalité insérée avec succès !");
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.erreur) {

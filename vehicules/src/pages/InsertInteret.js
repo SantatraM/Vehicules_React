@@ -31,7 +31,7 @@ function InsertInteret() {
         try {
             const response = await axios.post( "http://localhost:8080/interet", JSON.stringify({ taux }), { headers });
             if (response.data.data != null) {
-                setSuccess("Categorie "+ response.data.data.idCategorie +"inséré avec succès !");
+                setSuccess("Interet inséré avec succès !");
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.erreur) {
