@@ -42,7 +42,7 @@ function InsertModele() {
             }
             });
 
-            axios.get('http://localhost:8080/categories', { headers }).then(response => {
+            axios.get(Api_url+'/categories', { headers }).then(response => {
 
             if (Array.isArray(response.data.data)) {
                 setCategorie(response.data.data);
@@ -69,7 +69,7 @@ function InsertModele() {
         try {
             const formdata = JSON.stringify({ idmarque, nommodele, idcategorie });
             console.log(formdata);
-            const response = await axios.post("http://localhost:8080/modele", formdata, { headers });
+            const response = await axios.post(Api_url+"/modele", formdata, { headers });
             if (response.data.data != null) {
                 setSuccess("Categorie "+ response.data.data.id +"inséré avec succès !");
             }

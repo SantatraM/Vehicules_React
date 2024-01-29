@@ -52,7 +52,7 @@ function InsertMarque() {
     const [pays, setPays] = useState([]);
 
     useEffect(() => {
-    axios.get('http://localhost:8080/pays', {headers})
+    axios.get(Api_url+'/pays', {headers})
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setPays(response.data.data);
