@@ -39,7 +39,7 @@ function Login() {
       });
         console.log("tafiditra!!!");
         console.log(response  .data.response.token);
-        localStorage.setItem('token', response.data.response.token);
+        sessionStorage.setItem('token', response.data.response.token);
         navigate('/element');
     } catch (error) {
       console.log(error);

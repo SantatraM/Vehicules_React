@@ -7,21 +7,29 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function InsertInteret() {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const [taux, setTaux] = useState("");
     const [error , setError] = useState("");
     const [success, setSuccess] = useState("");
     const navigate = useNavigate();
 
+    if (!token) {
+        navigate('/login');
+    }
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post( "http://localhost:8080/interet", JSON.stringify({ taux }));
+            const response = await axios.post( "http://localhost:8080/interet", JSON.stringify({ taux }), { headers });
             if (response.data.data != null) {
                 setSuccess("Categorie "+ response.data.data.idCategorie +"inséré avec succès !");
             }
@@ -33,10 +41,6 @@ function InsertInteret() {
             }
         }
     };
-
-    if (!token) {
-        navigate('/login');
-    }
 
     return (
         <div className="container-scroller">

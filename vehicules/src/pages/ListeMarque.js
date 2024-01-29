@@ -4,18 +4,28 @@ import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeMarque() {
   const [marques, setMarques] = useState([
   ]);
-
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem('token');
 
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Nombre d'éléments par page
 
+  if( !token ) {
+      navigate('/login');
+  }
+  const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+  };
+
   useEffect(() => {
-    axios.get('http://localhost:8080/marques')
+    axios.get('http://localhost:8080/marques', { headers })
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setMarques(response.data.data);

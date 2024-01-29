@@ -29,43 +29,24 @@ function Inscription() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  //   const fieldOrder = [
-  //   'nom',
-  //   'prenom',
-  //   'dateNaissance',
-  //   'sexe',
-  //   'login',
-  //   'role',
-  //   'motDePasse',
-  //   'adresse',
-  // ];
-
-  // const [formData, setFormData] = useState(() => {
-  //   const initialFormData = {};
-  //   fieldOrder.forEach(field => {
-  //     initialFormData[field] = '';
-  //   });
-  //   return initialFormData;
-  // });
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
-  // };
-
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    console.log(JSON.stringify(formData));
     try {
-      const response = await axios.post( "http://localhost:8080/initial/inscription", formData );
+      const response = await axios.post( "http://localhost:8080/initial/inscription", formData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      } );
       console.log("tafiditra!!!");
-      console.log(response  .data.response.token);
-      localStorage.setItem('token', response.data.response.token);
+      console.log(response.data.response.token);
+      sessionStorage.setItem('token', response.data.response.token);
       navigate('/element');
     } catch (error) {
       console.log(error);
-      setError(error.response.data.error);
+      setError(error.response.error);
     }
   };
 
@@ -116,7 +97,7 @@ function Inscription() {
                       </div>
                       <div className="form-group col-md-6">
                         <select
-                          className="form-control"
+                          className="form-control form-control-lg"
                           name="sexe"
                           value={formData.sexe}
                           onChange={handleInputChange}
@@ -155,6 +136,7 @@ function Inscription() {
                           onChange={handleInputChange}
                         />
                       </div>
+                      {error && <p style={{ color: 'red' }}>{error}</p>}
                       <div className="mt-3">
                         <button
                           type="submit"

@@ -9,11 +9,11 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
-import REact, {useEffect , useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 
 function InsertFonctionnalite() {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const [nomFonctionnaliteTechnologique, setFonctionnalite] = useState("");
     const [error , setError] = useState("");
     const [success, setSuccess] = useState("");

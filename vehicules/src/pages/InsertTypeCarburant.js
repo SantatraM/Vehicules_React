@@ -18,7 +18,7 @@ function InsertTypeCarburant() {
     const [success, setSuccess] = useState("");
     const navigate = useNavigate();
     
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if( !token ) {
         navigate('/login');
     }
@@ -29,9 +29,17 @@ function InsertTypeCarburant() {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post( "http://localhost:8080/typecarburant", JSON.stringify({ typeCarburant }), { headers });  
-        if (response != null) {
-            setSuccess(response);
+        try {
+            const response = await axios.post( "http://localhost:8080/typecarburant", JSON.stringify({ typeCarburant }), { headers });  
+            if (response != null) {
+                setSuccess(response);
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.erreur) {
+                setError(error.response.data.erreur);
+            } else {
+                setError("Une erreur inattendue s'est produite.");
+            }
         }
     };
 

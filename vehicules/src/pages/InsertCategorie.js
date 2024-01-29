@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function InsertCategorie() {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const [nomCategorie, setNomCategorie] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");

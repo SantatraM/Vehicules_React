@@ -11,14 +11,26 @@ import '../assets/js/todolist.js';
 
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeFonctionnaliteTechno() {
   const [fonctionnalite, setFonctionnalites] = useState([]);
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem('token');
+
+  const [step, setStep] = useState(1);
+    if( !token ) {
+        navigate('/login');
+    }
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
 
   useEffect(() => {
-    axios.get('http://localhost:8080/fonctionnalite')
+    axios.get('http://localhost:8080/fonctionnalite', {headers})
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setFonctionnalites(response.data.data);

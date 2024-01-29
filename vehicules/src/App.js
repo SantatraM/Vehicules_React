@@ -1,9 +1,7 @@
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import { BrowserRouter as Router, Route ,Routes } from 'react-router-dom';
+import { Route ,Routes } from 'react-router-dom';
 import InsertMarque from './pages/InsertMarque';
 import InsertCategorie from './pages/InsertCategorie';
-import Ensemble from './pages/Ensemble';
+// import Ensemble from './pages/Ensemble';
 import InsertTypeCarburant from './pages/InsertTypeCarburant';
 import InsertFonctionnalite from './pages/InsertFonctionnalite';
 import InsertModele from './pages/InsertModele';
@@ -22,13 +20,6 @@ import Login from './pages/Login';
 import Inscription from './pages/Inscription';
 
 function App() {
-  const topSellersData = [
-    { seller: 'Vendeur1', sales: 100 },
-    { seller: 'Vendeur2', sales: 90 },
-    { seller: 'Vendeur3', sales: 80 },
-    { seller: 'Vendeur4', sales: 70 },
-    { seller: 'Vendeur5', sales: 60 },
-  ];
   return (
     <>
       <Routes>

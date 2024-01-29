@@ -11,13 +11,24 @@ import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeModele() {
   const [models, setModeles] = useState([]);
+  const token = sessionStorage.getItem('token');
+  const navigate = useNavigate();
+
+    if( !token ) {
+        navigate('/login');
+    }
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
 
   useEffect(() => {
-    axios.get('http://localhost:8081/modeles')
+    axios.get('http://localhost:8080/modeles', { headers})
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setModeles(response.data.data);
@@ -26,7 +37,7 @@ function ListeModele() {
           console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
         }
       });
-  }, []);
+  });
 
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
@@ -59,11 +70,11 @@ function ListeModele() {
                     </tr>
                   </thead>
                   <tbody>
-                    {displayedItems.map((modeles, index) => (
+                    {displayedItems.map((modele, index) => (
                       <tr key={index}>
-                        <td>{modeles.id}</td>
-                        <td>{modeles.nomModele}</td>
-                        <td>{modeles.categorie}</td>
+                        <td>{modele.id}</td>
+                        <td>{modele.marque.nom_Marque}</td>
+                        <td>{modele.categorie.id}</td>
                         <td>
                             <Link to="" >
                             <button type="button" class="btn btn-success btn-rounded btn-icon">
