@@ -11,7 +11,7 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
-
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function InsertCategorie() {
     const token = sessionStorage.getItem("token");
     const [nomCategorie, setNomCategorie] = useState("");
@@ -28,7 +28,7 @@ function InsertCategorie() {
         try {
 
 
-            const response = await axios.post("http://localhost:8080/categorie", JSON.stringify({ nomCategorie }), {headers});
+            const response = await axios.post(Api_url+"/categorie", JSON.stringify({ nomCategorie }), {headers});
 
             if (response.data.data != null) {
                 setSuccess("Categorie "+ response.data.data.id +"inséré avec succès !");

@@ -14,11 +14,12 @@ import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function ListeAnnonceNonValide() {
  
   const [annonces , setAnnonces] = useState([]);
   useEffect(() => {
-    axios.post('http://localhost:8081/annonce/Avalide')
+    axios.post(+Api_url+'/annonce/Avalide')
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setAnnonces(response.data.data);

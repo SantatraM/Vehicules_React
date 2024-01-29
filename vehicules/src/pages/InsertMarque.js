@@ -11,6 +11,7 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function InsertMarque() {
     const token = sessionStorage.getItem("token");
     const [error, setError] = useState("");
@@ -34,7 +35,7 @@ function InsertMarque() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:8080/marque", JSON.stringify({ nomMarque, idPays }), {headers});
+            const response = await axios.post(Api_url+"/marque", JSON.stringify({ nomMarque, idPays }), {headers});
             if (response.data != null) {
                 console.log(response);
                 setSuccess(response.data);

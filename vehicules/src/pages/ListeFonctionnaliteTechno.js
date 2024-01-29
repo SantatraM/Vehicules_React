@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function ListeFonctionnaliteTechno() {
   const [fonctionnalite, setFonctionnalites] = useState([]);
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function ListeFonctionnaliteTechno() {
 
   useEffect(() => {
 
-    axios.get('http://localhost:8080/fonctionnalite', {headers})
+    axios.get(Api_url+'/fonctionnalite', {headers})
 
       .then(response => {
         if (Array.isArray(response.data.data)) {

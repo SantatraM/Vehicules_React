@@ -15,6 +15,7 @@ import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function ListeTypeCArburant() {
   const [data, setData] = useState([]);
     const token = sessionStorage.getItem('token');
@@ -29,7 +30,7 @@ function ListeTypeCArburant() {
     };
 
   useEffect(() => {
-    axios.get('http://localhost:8081/typecarburants', { headers })
+    axios.get(Api_url+'/typecarburants', { headers })
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setData(response.data.data);

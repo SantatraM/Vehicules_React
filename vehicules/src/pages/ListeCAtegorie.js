@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function ListeCategorie() {
     const token = sessionStorage.getItem('token');
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function ListeCategorie() {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
 
-    axios.get('http://localhost:8080/categories', { headers })
+    axios.get(Api_url+'/categories', { headers })
 
       .then(response => {
         if (Array.isArray(response.data.data)) {

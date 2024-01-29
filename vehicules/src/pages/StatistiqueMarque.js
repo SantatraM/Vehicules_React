@@ -8,7 +8,7 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
 Chart.register(...registerables);
-
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function StatistiqueVendeur() {
   const location = useLocation();
   const mois = new URLSearchParams(location.search).get('mois');
@@ -25,7 +25,7 @@ function StatistiqueVendeur() {
   }
 
   useEffect(() => {
-    axios.post('http://localhost:8081/statistique/marque/' + mois + '/' + annee + '/' + nombre)
+    axios.post(Api_url+'/statistique/marque/' + mois + '/' + annee + '/' + nombre)
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setAnnonces(response.data.data);

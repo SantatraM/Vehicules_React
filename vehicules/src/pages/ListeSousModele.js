@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import './css/pagination.css';
 import axios from 'axios';
 
+const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function ListeSousModele() {
   const token = sessionStorage.getItem('token');
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function ListeSousModele() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8080/sousModeles', { headers })
+    axios.get(Api_url+'/sousModeles', { headers })
     .then(response => {
         console.log(response);
         if (Array.isArray(response.data)) {
