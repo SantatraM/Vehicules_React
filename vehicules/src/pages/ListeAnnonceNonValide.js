@@ -8,7 +8,7 @@ import '../assets/js/hoverable-collapse.js';
 import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
-import '../assets/vendors/mdi/css/materialdesignicons.min.css';
+// import '../assets/vendors/mdi/css/materialdesignicons.min.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';

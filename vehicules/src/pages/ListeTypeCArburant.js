@@ -38,7 +38,7 @@ function ListeTypeCArburant() {
           console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
         }
       });
-  }, []);
+  });
 
 
   const [pageNumber, setPageNumber] = useState(0);

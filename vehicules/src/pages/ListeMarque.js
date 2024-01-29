@@ -34,7 +34,7 @@ function ListeMarque() {
           console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
         }
       });
-  }, []);
+  });
 
   const pageCount = Math.ceil(marques.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;
