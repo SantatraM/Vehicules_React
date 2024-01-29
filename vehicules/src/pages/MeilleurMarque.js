@@ -13,6 +13,7 @@ import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
 function MeilleurMarque() {
+  const token = sessionStorage.getItem("token");
   const [months] = useState(Array.from({ length: 12 }, (_, index) => index + 1));
   const [mois, setMois] = useState('');
   const [annee, setAnnee] = useState('');
@@ -38,6 +39,10 @@ function MeilleurMarque() {
 
     navigate(`/statMarque?mois=${mois}&annee=${annee}&nombre=${nombre}`);
   };
+
+  if (!token) {
+      navigate('/login');
+  }
 
   return (
     <div className="container-scroller">

@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 import Header from '../components/Header';
@@ -17,7 +18,11 @@ function StatistiqueVendeur() {
   const [vendeurs, setVendeurs] = useState([]);
   const [annonces, setAnnonces] = useState([]);
   const chartRef = useRef(null);
-
+    const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
+  if (!token) {
+      navigate('/login');
+  }
   useEffect(() => {
     axios.post('http://localhost:8081/statistique/vendeur/' + mois + '/' + annee + '/' + nombre)
       .then(response => {

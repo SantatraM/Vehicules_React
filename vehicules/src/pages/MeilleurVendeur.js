@@ -13,6 +13,7 @@ import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
 function MeilleurVendeur() {
+  const token = sessionStorage.getItem("token");
   const [months] = useState(Array.from({ length: 12 }, (_, index) => index + 1));
   const [mois, setMois] = useState('');
   const [annee, setAnnee] = useState('');
@@ -29,6 +30,10 @@ function MeilleurVendeur() {
     else if (name === 'annee') setAnnee(value);
     else if (name === 'nombre') setNombre(value);
   };
+
+  if (!token) {
+      navigate('/login');
+  }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();

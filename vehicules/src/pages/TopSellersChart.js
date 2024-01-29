@@ -1,10 +1,16 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
+import { useNavigate } from 'react-router-dom';
 
 const TopSellersChart = ({ data }) => {
   const sellers = data.map(entry => entry.seller);
   const sales = data.map(entry => entry.sales);
 
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
+  if (!token) {
+      navigate('/login');
+  }
   const chartData = {
     labels: sellers, // Utiliser les noms des vendeurs comme catégories
     datasets: [
