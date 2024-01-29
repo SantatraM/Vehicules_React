@@ -11,6 +11,7 @@ const TopSellersChart = ({ data }) => {
   if (!token) {
       navigate('/login');
   }
+  
   const chartData = {
     labels: sellers, // Utiliser les noms des vendeurs comme catégories
     datasets: [

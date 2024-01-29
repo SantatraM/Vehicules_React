@@ -24,8 +24,12 @@ function StatistiqueVendeur() {
       navigate('/login');
   }
 
+  const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+  };
   useEffect(() => {
-    axios.post(Api_url+'/statistique/marque/' + mois + '/' + annee + '/' + nombre)
+    axios.post(Api_url+'/statistique/marque/' + mois + '/' + annee + '/' + nombre, {headers})
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setAnnonces(response.data.data);

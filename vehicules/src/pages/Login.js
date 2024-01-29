@@ -15,8 +15,8 @@ import { useNavigate } from 'react-router-dom';
 const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
 function Login() {
   const [error, setError] = useState("");
-  const [login, setEmail] = useState("Mamy@gmail.com");
-  const [motDePasse, setPass] = useState("1");
+  const [login, setEmail] = useState("fan@gmail.com");
+  const [motDePasse, setPass] = useState("pass");
   const navigate = useNavigate();
   
   useEffect(() => {
