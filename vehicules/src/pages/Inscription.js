@@ -7,17 +7,20 @@ import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 function Inscription() {
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
-    datenaissance: "",
+    dateNaissance: "",
     sexe: "1",
     login: "",
-    motDePasse: "",
     role: "admin",
+    motDePasse: "",
     adresse: "",
   });
 
@@ -26,10 +29,44 @@ function Inscription() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  //   const fieldOrder = [
+  //   'nom',
+  //   'prenom',
+  //   'dateNaissance',
+  //   'sexe',
+  //   'login',
+  //   'role',
+  //   'motDePasse',
+  //   'adresse',
+  // ];
+
+  // const [formData, setFormData] = useState(() => {
+  //   const initialFormData = {};
+  //   fieldOrder.forEach(field => {
+  //     initialFormData[field] = '';
+  //   });
+  //   return initialFormData;
+  // });
+
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
+  // };
+
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    await axios.post( "http://localhost:8080/initial/inscription", formData );
+    try {
+      const response = await axios.post( "http://localhost:8080/initial/inscription", formData );
+      console.log("tafiditra!!!");
+      console.log(response  .data.response.token);
+      localStorage.setItem('token', response.data.response.token);
+      navigate('/element');
+    } catch (error) {
+      console.log(error);
+      setError(error.response.data.error);
+    }
   };
 
 
@@ -72,8 +109,8 @@ function Inscription() {
                           type="date"
                           className="form-control form-control-lg"
                           placeholder="Date de Naissance"
-                          name="datenaissance"
-                          value={formData.datenaissance}
+                          name="dateNaissance"
+                          value={formData.dateNaissance}
                           onChange={handleInputChange}
                         />
                       </div>

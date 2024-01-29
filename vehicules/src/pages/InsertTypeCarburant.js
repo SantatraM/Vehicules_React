@@ -10,16 +10,18 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function InsertTypeCarburant() {
     const [typeCarburant, setTypeCarburant] = useState ("");
     const [error , setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const navigate = useNavigate();
     
     const token = localStorage.getItem('token');
-    // if( !token) {
-    //     return <Navigate to="/login" />;
-    // }
+    if( !token ) {
+        navigate('/login');
+    }
     const headers = {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -27,7 +29,10 @@ function InsertTypeCarburant() {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        await axios.post( "http://localhost:8080/typecarburant", JSON.stringify({ typeCarburant }), { headers });
+        const response = await axios.post( "http://localhost:8080/typecarburant", JSON.stringify({ typeCarburant }), { headers });  
+        if (response != null) {
+            setSuccess(response);
+        }
     };
 
     return (
@@ -47,6 +52,8 @@ function InsertTypeCarburant() {
                                                     <label>Type carburant</label>
                                                     <input type="text" className="form-control" id="exampleInputUsername1" name='typeCarburant' placeholder="typeCarburant" onChange={(e) => setTypeCarburant(e.target.value)}/>
                                                 </div>
+                                                {error && <p style={{ color: 'red' }}>{error}</p>}
+                                                {success && <p style={{ color: 'green' }}>{success}</p>}
                                                 <button type="submit" className="btn btn-primary mr-2">Submit</button>
                                             </form>
                                     </div>

@@ -9,18 +9,34 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
-import REact, {useEffect , useState} from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function InsertInteret() {
+    const token = localStorage.getItem("token");
     const [taux, setTaux] = useState("");
     const [error , setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const navigate = useNavigate();
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        await axios.post( "http://localhost:8080/interet", JSON.stringify({ taux }));
+        try {
+            const response = await axios.post( "http://localhost:8080/interet", JSON.stringify({ taux }));
+            if (response.data.data != null) {
+                setSuccess("Categorie "+ response.data.data.idCategorie +"inséré avec succès !");
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.erreur) {
+                setError(error.response.data.erreur);
+            } else {
+                setError("Une erreur inattendue s'est produite.");
+            }
+        }
     };
+
+    if (!token) {
+        navigate('/login');
+    }
 
     return (
         <div className="container-scroller">
@@ -39,6 +55,8 @@ function InsertInteret() {
                                                 <label for="exampleInputUsername1">taux</label>
                                                 <input type="number" className="form-control" name='interet' placeholder="interet" onChange={(e) => setTaux(e.target.value)}/>
                                             </div>
+                                                      {error && <p style={{ color: 'red' }}>{error}</p>}
+                                                      {success && <p style={{ color: 'green' }}>{success}</p>}
                                             <button type="submit" className="btn btn-primary mr-2">Submit</button>
                                         </form>
                                     </div>
