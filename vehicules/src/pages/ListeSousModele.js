@@ -9,6 +9,7 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
@@ -27,6 +28,17 @@ function ListeSousModele() {
 
   const pageCount = Math.ceil(data.length / itemsPerPage);
   const offset = pageNumber * itemsPerPage;
+
+  const token = sessionStorage.getItem('token');
+  const navigate = useNavigate();
+
+  if( !token ) {
+      navigate('/login');
+  }
+  const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+  };
 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);

@@ -7,26 +7,34 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 
-import REact, {useEffect , useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 
 function InsertFonctionnalite() {
+    const token = sessionStorage.getItem("token");
     const [nomFonctionnaliteTechnologique, setFonctionnalite] = useState("");
     const [error , setError] = useState("");
     const [success, setSuccess] = useState("");
+    const navigate = useNavigate();
 
+    if (!token) {
+        navigate('/login');
+    }
+
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:8081/fonctionnalite",
-                JSON.stringify({ nomFonctionnaliteTechnologique }),
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
+
+                "http://localhost:8080/fonctionnalite",
+                JSON.stringify({ nomFonctionnaliteTechnologique }), { headers }
+
             );
             if (response.data.data != null) {
                 setSuccess("Interet "+ response.data.data.idFonctionnaliteTechnologique +"inséré avec succès !");

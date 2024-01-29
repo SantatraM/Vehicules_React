@@ -9,13 +9,20 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 function InsertMarque() {
+    const token = sessionStorage.getItem("token");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const navigate = useNavigate();
 
     const [nomMarque, setNomMarque] = useState("");
     const [idPays, setId_pays] = useState("");
+
+    if( !token ) {
+        navigate('/login');
+    }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -25,6 +32,7 @@ function InsertMarque() {
                 {
                     method: "POST",
                     headers: {
+                        "Authorization": `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
                 }

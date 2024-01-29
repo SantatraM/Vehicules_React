@@ -11,14 +11,27 @@ import '../assets/js/todolist.js';
 
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeFonctionnaliteTechno() {
   const [fonctionnalite, setFonctionnalites] = useState([]);
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem('token');
+
+    if( !token ) {
+        navigate('/login');
+    }
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
 
   useEffect(() => {
-    axios.get('http://localhost:8081/fonctionnalite')
+
+    axios.get('http://localhost:8080/fonctionnalite', {headers})
+
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setFonctionnalites(response.data.data);
@@ -27,7 +40,7 @@ function ListeFonctionnaliteTechno() {
           console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
         }
       });
-  }, []);
+  });
 
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page

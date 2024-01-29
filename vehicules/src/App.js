@@ -1,10 +1,12 @@
+
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 
 import { BrowserRouter as Router, Route ,Routes } from 'react-router-dom';
+
 import InsertMarque from './pages/InsertMarque';
 import InsertCategorie from './pages/InsertCategorie';
-import Ensemble from './pages/Ensemble';
+// import Ensemble from './pages/Ensemble';
 import InsertTypeCarburant from './pages/InsertTypeCarburant';
 import InsertFonctionnalite from './pages/InsertFonctionnalite';
 import InsertModele from './pages/InsertModele';

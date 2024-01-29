@@ -7,17 +7,20 @@ import '../assets/js/off-canvas.js';
 import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 function Inscription() {
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
-    datenaissance: "",
+    dateNaissance: "",
     sexe: "1",
     login: "",
-    motDePasse: "",
     role: "admin",
+    motDePasse: "",
     adresse: "",
   });
 
@@ -26,10 +29,25 @@ function Inscription() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    await axios.post( "http://localhost:8080/initial/inscription", formData );
+    console.log(JSON.stringify(formData));
+    try {
+      const response = await axios.post( "http://localhost:8080/initial/inscription", formData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      } );
+      console.log("tafiditra!!!");
+      console.log(response.data.response.token);
+      sessionStorage.setItem('token', response.data.response.token);
+      navigate('/element');
+    } catch (error) {
+      console.log(error);
+      setError(error.response.error);
+    }
   };
 
 
@@ -72,14 +90,14 @@ function Inscription() {
                           type="date"
                           className="form-control form-control-lg"
                           placeholder="Date de Naissance"
-                          name="datenaissance"
-                          value={formData.datenaissance}
+                          name="dateNaissance"
+                          value={formData.dateNaissance}
                           onChange={handleInputChange}
                         />
                       </div>
                       <div className="form-group col-md-6">
                         <select
-                          className="form-control"
+                          className="form-control form-control-lg"
                           name="sexe"
                           value={formData.sexe}
                           onChange={handleInputChange}
@@ -118,6 +136,7 @@ function Inscription() {
                           onChange={handleInputChange}
                         />
                       </div>
+                      {error && <p style={{ color: 'red' }}>{error}</p>}
                       <div className="mt-3">
                         <button
                           type="submit"

@@ -10,22 +10,27 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
 function ListeCategorie() {
-  const [data, setData] = useState([
-    { name: 'Jacob', country: 'Photoshop' },
-    { name: 'Messy', country: 'Flash' },
-    { name: 'John', country: 'Premier' },
-    { name: 'Peter', country: 'After effects' },
-    { name: 'Dave', country: '53275535' },
-    { name: 'Dave', country: '53275535' },
-  ]);
+    const token = sessionStorage.getItem('token');
+    const navigate = useNavigate();
+
+    if( !token ) {
+        navigate('/login');
+    }
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
 
   const [categories, setCategories] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:8081/categories')
+
+    axios.get('http://localhost:8080/categories', { headers })
+
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setCategories(response.data.data);
@@ -34,7 +39,7 @@ function ListeCategorie() {
           console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
         }
       });
-  }, []);
+  });
 
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5; // Number of items per page
@@ -77,7 +82,7 @@ function ListeCategorie() {
                             </button>
                             </Link>
                         </td>
-                            <td>
+                        <td>
                             <Link to="" >
                             <button type="button" className="btn btn-danger btn-rounded btn-icon">
                               <i className="typcn typcn-trash"></i>

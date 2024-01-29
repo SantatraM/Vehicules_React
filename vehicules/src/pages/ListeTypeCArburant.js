@@ -8,6 +8,7 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
@@ -16,9 +17,19 @@ import './css/pagination.css';
 
 function ListeTypeCArburant() {
   const [data, setData] = useState([]);
+    const token = sessionStorage.getItem('token');
+    const navigate = useNavigate();
+    
+    if( !token ) {
+        navigate('/login');
+    }
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
 
   useEffect(() => {
-    axios.get('http://localhost:8081/typecarburants')
+    axios.get('http://localhost:8081/typecarburants', { headers })
       .then(response => {
         if (Array.isArray(response.data.data)) {
           setData(response.data.data);
@@ -27,7 +38,7 @@ function ListeTypeCArburant() {
           console.error('La réponse de l\'API n\'est pas un tableau JSON:', response.data);
         }
       });
-  }, []);
+  });
 
 
   const [pageNumber, setPageNumber] = useState(0);

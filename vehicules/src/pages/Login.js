@@ -8,14 +8,15 @@ import '../assets/js/todolist.js';
 import logo from '../assets/images/logo.svg';
 
 import { useState, useEffect } from "react";
-import { Link,Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [redirectPath, setRedirectPath] = useState(null);
   const [error, setError] = useState("");
   const [login, setEmail] = useState("");
   const [motDePasse, setPass] = useState("");
+  const navigate = useNavigate();
   
   useEffect(() => {
     setError("");
@@ -24,25 +25,35 @@ function Login() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData =JSON.stringify({ login, motDePasse });
+
     // const formData = new URLSearchParams();
     // formData.append('login', e.target.login.value);
     // formData.append('motDePasse', e.target.motDePasse.value);
     console.log(formData);
+    try {
       const response = await axios.post("http://localhost:8080/initial/login", formData,
       {
-          headers: {
+        headers: {
           'Content-Type': 'application/json',
         },
       });
-      if(response != null) {
         console.log("tafiditra!!!");
-        localStorage.setItem('token', response.data.token);
-        setRedirectPath('/element');
+        console.log(response  .data.response.token);
+        sessionStorage.setItem('token', response.data.response.token);
+        navigate('/element');
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
       } else {
-        console.log("tsy tafiditra !!!");
+        setError("Une erreur inattendue s'est produite.");
       }
-  };  
+    }
+    };  
 
+    // if (redirectPath != null) {
+    //   return <Redirect to={redirectPath} />;
+    // }
   return (
     <div className="container-scroller">
     <div className="container-fluid page-body-wrapper full-page-wrapper">
@@ -63,6 +74,7 @@ function Login() {
                   <input type="password" className="form-control form-control-lg" name="motDePasse" placeholder="Password"
                           onChange={(e) => setPass(e.target.value)}/>
                 </div>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="mt-3">
                   <button className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>

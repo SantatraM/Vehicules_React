@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
@@ -9,28 +9,29 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 
 function InsertCategorie() {
-
-    const [nomcategorie, setNomCategorie] = useState("");
+    const token = sessionStorage.getItem("token");
+    const [nomCategorie, setNomCategorie] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const navigate = useNavigate();
 
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(
-                "http://localhost:8081/categorie",
-                JSON.stringify({ nomcategorie }),
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
+
+
+            const response = await axios.post("http://localhost:8080/categorie", JSON.stringify({ nomCategorie }), {headers});
+
             if (response.data.data != null) {
-                setSuccess("Categorie "+ response.data.data.idCategorie +"inséré avec succès !");
+                setSuccess("Categorie "+ response.data.data.id +"inséré avec succès !");
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.erreur) {
@@ -40,6 +41,10 @@ function InsertCategorie() {
             }
         }
     };
+
+    if (!token) {
+        navigate('/login');
+    }
 
     return (
         <div className="container-scroller">

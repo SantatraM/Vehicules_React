@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect , useState } from 'react';
 import '../assets/vendors/typicons.font/font/typicons.css';
 import '../assets/vendors/css/vendor.bundle.base.css';
 import '../assets/css/vertical-layout-light/style.css';
@@ -8,19 +8,34 @@ import '../assets/js/settings.js';
 import '../assets/js/todolist.js';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function InsertSousModele() {
-  const [formData, setFormData] = useState ({
-    nomSousModele:"",
-    vitesseMax:"",
-    consommation:"",
-    idTypeCarburant:"",
-    automatique: true,
-    puissanceMoteur:"",
-    batterie:"",
-  });
+    const [modeles, setModeles] = useState([]);
+    const [carburants, setCarburants] = useState([]);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const token = sessionStorage.getItem('token');
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState ({
+      nomSousModele:"",
+      vitesseMax:"",
+      consommation:"",
+      idTypeCarburant:"",
+      automatique: true,
+      puissanceMoteur:"",
+      batterie:"",
+    });
   const [step, setStep] = useState(1);
+    if( !token ) {
+        navigate('/login');
+    }
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
+
 
   const handleNext = () => {
     setStep(step + 1);
@@ -30,13 +45,43 @@ function InsertSousModele() {
     setStep(step - 1);
   };
 
-  const modeles = axios.get('http://localhost:8081/modeles').data.data;
-  const carburants = axios.get('http://localhost:8081/typecarburants').data.data;
+
+  useEffect(() => {
+    try {
+      axios.get('http://localhost:8080/modeles', { headers }).then(response => {setModeles(response.data.data)});
+      axios.get('http://localhost:8080/typecarburants', { headers }).then(response => {setCarburants(response.data.data)});
+
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.erreur) {
+          setError(error.response.data.erreur);
+      } else {
+          console.log(error);
+          setError("Une erreur inattendue s'est produite.");
+      }
+    }
+  }, []); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log(JSON.stringify({ formData }));
+            const response = await axios.post("http://localhost:8080/sousmodele", JSON.stringify({ formData }), {headers});
+            if (response.data.data != null) {
+                setSuccess("Categorie "+ response.data.data.id +"inséré avec succès !");
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.erreur) {
+                setError(error.response.data.erreur);
+            } else {
+                setError("Une erreur inattendue s'est produite.");
+            }
+        }
+    };
 
   return (
     <div className="container-scroller">
@@ -50,7 +95,7 @@ function InsertSousModele() {
                 <div className="card ">
                   <div className="card-body">
                     <h4 className="card-title">Insertion Sous Modele</h4>
-                    <form className="forms-sample" onSubmit={handleInputChange}>
+                    <form className="forms-sample" onSubmit={handleFormSubmit}>
                     {step === 1 && (
                       <>
                         <div className="form-group">
@@ -103,7 +148,7 @@ function InsertSousModele() {
                               onChange={handleInputChange}>
                               {carburants.map((carburant) => (
                                 <option key={carburant.id} value={carburant.id}>
-                                    {carburant.nom_carburant}
+                                    {carburant.nomTypeCarburant}
                                 </option>
                               ))}
                             </select>
@@ -133,6 +178,8 @@ function InsertSousModele() {
                             <label>Image</label>
                             <input type="file" name="img" className="" multiple/>
                         </div>
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        {success && <p style={{ color: 'green' }}>{success}</p>}
                         <button type="button" className="btn btn-secondary mr-2" onClick={handlePrev}>
                           Previous
                         </button>
