@@ -15,7 +15,7 @@ import Sidebar from '../components/Sidebar';
 import { Link } from 'react-router-dom';
 import './css/pagination.css';
 
-const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
+const Api_url = "https://vehicule-production-87c4.up.railway.app";
 function ListeTypeCArburant() {
   const [data, setData] = useState([]);
     const token = sessionStorage.getItem('token');

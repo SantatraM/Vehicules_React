@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
+const Api_url = "https://vehicule-production-87c4.up.railway.app";
 function InsertInteret() {
     const token = sessionStorage.getItem("token");
     const [taux, setTaux] = useState("");

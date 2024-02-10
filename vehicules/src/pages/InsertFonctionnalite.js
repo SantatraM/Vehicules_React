@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
 import axios from 'axios';
 
-const Api_url = "https://vehiculespring-production-5f1a.up.railway.app";
+const Api_url = "https://vehicule-production-87c4.up.railway.app";
 function InsertFonctionnalite() {
     const token = sessionStorage.getItem("token");
     const [nomFonctionnaliteTechnologique, setFonctionnalite] = useState("");
